@@ -1,0 +1,223 @@
+.mySchool{
+    position: relative;
+    display: flex;
+    margin-top: -5%;
+    margin-right: auto;
+    margin-left: auto;
+    width: 20%;
+    height: 20%;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: flex-end;
+
+}
+
+.pprofile{
+
+    position: relative;
+    display: flex;
+    margin-top: 0%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 6%;
+    height: 6%;
+    z-index: 2;
+}
+
+.rrectangle{
+    position: relative;
+    display: flex;
+    margin-top: 1%;
+    margin-left: auto;
+    margin-right: auto;
+    /* border-radius: 30%; */
+    background: #eef1fd;
+    width:70%;
+    height:100%;
+    border-top-left-radius: 10%;
+    border-top-right-radius: 10%;
+    border-end-end-radius: 10%;
+    border-bottom-left-radius: 10%;
+}
+
+.rectangle{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap; 
+     align-content: stretch;
+    align-items: stretch; 
+     justify-content:normal; 
+    margin-top: -4%;
+    background: #EEF8FD;
+    width: 30%;
+    margin-left: 30%;
+    /* border-radius:30%; */
+    border-top-left-radius: 10%;
+    border-top-right-radius: 10%;
+    border-end-end-radius: 10%;
+    border-bottom-left-radius: 10%;
+    padding: 5%;
+}
+
+
+.iinput_sign{
+    
+    position: relative;
+    display: flex;
+    margin-top:7%;
+    /* padding:0%; */
+    /* align-content: space-around; */
+    align-items: center;
+    justify-content: center;
+   
+}
+
+input{
+    /* border-radius: 30%; */
+    border: none;
+    font-size: 112%;
+    text-align: center;
+    padding:3%;
+    border-top-left-radius: 5%;
+    border-top-right-radius: 5%;
+    border-end-end-radius: 5%;
+    border-bottom-left-radius: 5%;
+}
+.ip{
+    margin-top:7%; 
+}
+/* .btn-name{
+    position: relative;
+    display: flex;
+    margin-top: 9%;
+    border-radius: 0%;
+    width: 700%;
+    height: 3000%;
+    font-size: 150%;
+    left: 35%;
+    text-align: center;
+    flex-direction: column;
+    
+    margin-left: 580%;
+
+       
+}
+
+.btn{
+    
+
+    position: relative;
+    display: flex;
+    margin-top: 9%;
+    border-radius: 30%;
+    width: 700%;
+    height: 300%;
+    font-size: 100%;
+    left:5%;
+    text-align: center;
+    flex-direction: column;
+    right: 25%;    
+
+}
+
+.btn-password{
+    position: relative;
+    display: flex;
+    margin-top: 20%;
+    border-radius: 5%;
+    width: 700%;
+    height: 3000%;
+    font-size: 150%;
+    left: 20%;
+    text-align: center;
+    flex-direction: column;
+   
+    
+    margin-left: 500%;
+
+} */
+
+.btn-p{
+    position: relative;
+    display: flex;
+    margin-top: 15%;
+    border-radius: 30%;
+    width: 700%;
+    height: 40%;
+    font-size: 100%;
+    left:5%;
+    text-align: center;
+    flex-direction: column;
+    right: 25%;   
+ 
+}
+
+
+.btn-goToSignup{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    margin-left: 32%;
+    margin-top: 5%;
+    border: none;
+    width: 40%;
+    background: #EEF8FD; 
+    text-decoration-line: underline;
+    /* position: relative;
+    display: flex;
+    margin-top: 35%;
+    width: 100%;
+    height: 20%;
+    background: #EEF8FD; 
+    border-radius: 10%;
+    right: 10%;
+    font-size: 90%;
+    border:none; */
+  
+}
+/* .empty_div{
+    position: relative;
+    display: flex;
+    margin-top: 50%;
+    width: 11800%;
+    height: 20%; 
+} */
+
+.btn-login{
+    /* position: relative;
+    display: flex;
+    margin-top: 28%;
+    width: 25%;
+    height: 10%;
+    background: #00C694;
+    border-radius: 20%;
+    right: 5%;
+    font-size: 130%;
+    left: 33%; */
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    margin-top: 10%;
+    flex-direction: column;
+    margin-left: 37%;
+    background: #00C694;
+    border-radius: 42px;
+    font-size: 15px;
+    width: 25%;
+    color: #EEF8FD;
+}
+
+.iforgat{
+    margin-left: 10%;
+    margin-top: -18%;
+    background: #EEF8FD; 
+    font-size: 70%;
+    text-decoration-line: underline;
+
+}
+
+

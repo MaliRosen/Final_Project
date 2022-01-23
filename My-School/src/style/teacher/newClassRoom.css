@@ -1,0 +1,108 @@
+.classRoomImg{
+    position: absolute;
+    left: 10rem;
+    width: 50rem;
+    height: 20rem;
+}
+
+
+.numLesson{
+    position: absolute;
+    width: 4rem;
+    height: 2rem;
+    top: 19rem;
+    left: 700px;
+    /* border-radius: 10rem;*/
+    }
+
+   .dateLesson {
+    position: absolute;
+    width: 8rem;
+    height: 2rem;
+    top: 22rem;
+    left: 700px
+    }
+
+    .all{ 
+        position: relative;
+        width: 400px;
+        /* height: auto; */
+        /* left: 30.875rem; */
+        /* top: 6rem; */
+        background: #EEF8FD;
+        border-radius: 10px;
+        /* margin-left: auto; */
+        /* margin-right: auto; */
+        display: flex;
+        margin: auto;
+        flex-direction: column;
+        padding: 20px;
+        }
+
+        /* .menu-btn {
+            border: none;
+            background-color: transparent;
+             color: #1c2c53; 
+             width: 65%;
+            font-size: 15px;
+            font-family: inherit; 
+            cursor: pointer;
+            padding: 10px;
+        }         */
+.aa{
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 20px;
+}
+        .a{
+            
+            border: none;
+            text-align: right;
+            color: #000000;
+            /* position: absolute; */
+            /* left: 20%; */
+            /* right: 0%; */
+            width: 300px;
+            height: 20px;
+            border-radius: 30px;
+            font-family: inherit;
+            cursor: pointer;
+            padding: 10px;
+            margin: 5px auto;
+            direction: rtl;
+            font-size: small;
+        }
+
+        .b{
+        }
+        .c{
+                background-color: #ffffff;        
+            }
+        .d{
+            background-color: #ffffff;        
+
+        }
+        .e{
+        }
+        .f{
+        }
+        .g{
+        }
+
+        .buttn{
+            width: 40%;
+            /* top: 85%; */
+            /* height: 10%; */
+            /* left: 25%; */
+            background: #00C694;
+            border-radius: 42px;
+            /* position: absolute; */
+            font-style: normal;
+            font-size: medium;
+            text-align: center;
+            color: #EEF8FD;
+            margin: 6px auto;
+            height: 40px;
+            margin-top: 13px;
+        }
