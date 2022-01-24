@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 // import { useHistory } from "react-router-dom";
-import Header from '../header';
+import MainMenu from '../mainMenu';
 import Avatar from '@material-ui/core/Avatar';
 import { connect, useDispatch } from "react-redux";
 import { getAllAttendanceFromServer } from '../../services/getAllAttendance';
@@ -18,8 +18,8 @@ const ViewAttendance = (props) => {
     }, [])
 
     return (<div>
-        <Avatar>{props.fname && props.fname[0]}</Avatar>
-        <Header />
+        
+        <MainMenu />
         {/* {attendance&&attendance.map(a => (
         <li>
           {a?.name}

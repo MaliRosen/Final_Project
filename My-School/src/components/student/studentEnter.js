@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { attendanceToServer } from '../../services/attendance'
 import { connect, useDispatch } from "react-redux";
 import { previousLessonToServer } from '../../services/previousLessons';
-import HeaderS from '../headerS';
+import StudentMainMenu from '../studentMainMenu';
 
 import Avatar from '@material-ui/core/Avatar';
 
@@ -55,8 +55,8 @@ const Students = (props) => {
 
   return (
     <div>
-      <Avatar>{props.fname && props.fname[0]}</Avatar>
-      <HeaderS />
+      
+      <StudentMainMenu />
 
     </div>
   );

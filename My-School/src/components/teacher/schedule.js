@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
-import Header from '../header';
+import MainMenu from '../mainMenu';
 import Avatar from '@material-ui/core/Avatar';
 import { connect, useDispatch } from "react-redux";
 
@@ -9,8 +9,8 @@ const Schedule = (props) => {
         //פניה לשרת
     }
     return (<div>
-        <Avatar>{props.fname && props.fname[0]}</Avatar>
-        <Header />
+        
+        <MainMenu />
         <div>
             {scheduleFromServer()}
         </div>

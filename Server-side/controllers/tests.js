@@ -84,7 +84,7 @@ class TestController {
     
       postMark = async (req, res) => {
         try {
-          debugger
+          
           const { type, marks, lessonId } = req.body;
           //Validations.
           //Check if  exists

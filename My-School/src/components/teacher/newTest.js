@@ -4,7 +4,7 @@ import '../../style/teacher/newClassRoom.css';
 import { postTestToServer } from '../../services/postTest';
 import { useHistory } from 'react-router-dom';
 import { connect, useDispatch } from "react-redux";
-import Header from '../header';
+import MainMenu from '../mainMenu';
 import Avatar from '@material-ui/core/Avatar';
 import UseUploadFile from '../fileReader';
 import '../../style/teacher/newClassRoom.css'
@@ -22,7 +22,7 @@ const NewTest = (props) => {
 
     const history = useHistory();
     const postTest = async (nameSubject, date, file, comment) => {
-        debugger
+        
         let res = '';
         res = await postTestToServer({ teacher: props.teacher, nameSubject, date, file: fileData, comment, subject: props.subject });
         history.push("/tests");
@@ -34,9 +34,9 @@ const NewTest = (props) => {
 
     return (
         <>
-            <Avatar>{props.fname && props.fname[0]}</Avatar>
-            <Header />
-            <div class="all">
+            
+            <MainMenu />
+            <div className="all">
                 <div className="aa "> יצירת מבחן חדש</div>
 
                 <input type="text" className="a c" placeholder=":נושא"

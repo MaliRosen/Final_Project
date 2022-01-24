@@ -13,8 +13,8 @@
 
  
 export const postTestToServer = (data) => {
-    debugger
-    fetch('http://localhost:3000/postTest', {
+    
+    fetch('http://localhost:3000/test/postTest', {
         method: 'POST',
         headers: {
             Accept: 'application/json',

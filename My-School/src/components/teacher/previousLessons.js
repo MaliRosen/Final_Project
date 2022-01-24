@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
-import Header from '../header';
+import MainMenu from '../mainMenu';
 import Avatar from '@material-ui/core/Avatar';
 import { previousLessonToServer } from '../../services/previousLessons';
 import '../../style/student/s_previousLessons.css';
@@ -12,7 +12,13 @@ const PreviousLessons = (props) => {
   let history = useHistory();
   const [lesss, setless] = useState([]);
   // const res = history.location.state ? history.location.state.res : [];
-  useEffect(() => previousLessonToServer(props.subject).then(res => setless(res)).catch(err => alert(err)), [])
+  useEffect(() =>{
+    if(props.subject){
+       previousLessonToServer(props.subject)
+       .then(res => res[0] && setless(res))
+       .catch(err => alert(err))
+    }
+  }, [props.subject])
 
   useEffect(async()=>{
     let res = '';
@@ -35,35 +41,37 @@ const PreviousLessons = (props) => {
 
   return (
     <div>
-      <Avatar>{props.fname && props.fname[0]}</Avatar>
-      <Header />
+      {/* 
+      <MainMenu /> */}
       <div className="table">
-        <div class="pageTitle">
+        <div className="pageTitle">
     שיעורים קודמים:
         </div>
         <br />
         <table>
           <thead>
-            <tr class="title">
-              <td class="td2">מס שעור</td>
-              <td class="td2">  שם שעור</td>
-              <td class="td3">  תאריך </td>
-              <td class="td4">  הערה </td>
-              <td class="td2">  שעה </td>
+            <tr className="title">
+              <td className="td2">מס שעור</td>
+              <td className="td2">  שם שעור</td>
+              <td className="td3">  תאריך </td>
+              <td className="td4">  הערה </td>
+              <td className="td2">  שעה </td>
             </tr>
           </thead>
+          <tbody>
           {lesss.map(herLess => (
             <tr>
-              <td class="td2"> {herLess?.numLesson}</td>
-              <td class="td2"> {herLess?.lessonName}</td>
+              <td className="td2"> {herLess?.numLesson}</td>
+              <td className="td2"> {herLess?.lessonName}</td>
               {/* <td> {herLess?.file}</td> */}
-              <td class="td3"> {herLess?.date.slice(0,10)}</td>
-              <td class="td4"> {herLess?.notes}</td>
-              <td class="td2"> {herLess?.time}</td>
+              <td className="td3"> {herLess?.date.slice(0,10)}</td>
+              <td className="td4"> {herLess?.notes}</td>
+              <td className="td2"> {herLess?.time}</td>
               {/* {  <button onClick={()=>goToHw(herLess._id)}>שעורי בית להכניס  </button>} */}
               {<button className="sendBtn" onClick={() => goToHw(herLess.numLesson)}>ש.ב להכניס  </button>}
             </tr>
           ))}
+          </tbody>
         </table>
       </div>
     </div>

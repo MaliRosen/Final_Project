@@ -8,8 +8,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var TeacherRouter = require('./routes/teachers.js');
 var TestRouter = require('./routes/test');
-var lessonRouter = require('./routes/lesson');
-var studentRouter = require('./routes/student');
+var LessonRouter = require('./routes/lesson');
+var StudentRouter = require('./routes/student');
 const mongoose = require('mongoose');
 var app = express();
 
@@ -33,6 +33,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/teacher', TeacherRouter);
 app.use('/test', TestRouter);
+app.use('/lesson', LessonRouter);
+app.use('/student', StudentRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

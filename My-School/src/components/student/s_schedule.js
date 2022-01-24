@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
-import HeaderS from '../headerS';
+import StudentMainMenu from '../studentMainMenu';
 import Avatar from '@material-ui/core/Avatar';
 import { connect, useDispatch } from "react-redux";
 import { getAllScheduleFromServer } from '../../services/getAllSchedule';
@@ -10,7 +10,7 @@ const Schedule = (props) => {
     const [schedule, setSchedule] = useState([]);
     // useEffect(async () => {
     //     getAllScheduleFromServer(props.subject).then((data) => {
-    //         debugger
+    //         
     //         (setSchedule(data))
     //     })
     // }, [])
@@ -26,27 +26,28 @@ const Schedule = (props) => {
     }, [])
 
     return (<div>
-        <Avatar>{props.fname && props.fname[0]}</Avatar>
-        <HeaderS />
+        
+        <StudentMainMenu />
         <div className="table">
-            <div class="pageTitle">
+            <div className="pageTitle">
                 מערכת שעות:
             </div>
             <br />
             <table>
                 <thead>
                     <tr className="title">
-                        <td class="td2">תאריך </td>
-                        <td class="td3">שעור</td>
+                        <td className="td2">תאריך </td>
+                        <td className="td3">שעור</td>
                     </tr>
                 </thead>
-
+                <tbody>
                 {schedule?.map(s => (
                     <tr>
-                        <td class="td1"> {s?.date.slice(0, 10)}</td>
-                        <td class="td2"> {s?.lessonName}</td>
+                        <td className="td1"> {s?.date.slice(0, 10)}</td>
+                        <td className="td2"> {s?.lessonName}</td>
                     </tr>
                 ))}
+                </tbody>
             </table>
         </div>
     </div>

@@ -10,7 +10,7 @@
 // }
 
 export const newLessonToServer=(data) => {
-fetch('http://localhost:3000/postLesson/', {
+fetch('http://localhost:3000/lesson/postLesson/', {
   method: 'POST',
   headers: {
     Accept: 'application/json',

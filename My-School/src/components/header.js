@@ -1,60 +1,42 @@
+import { useState } from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import { useSelector } from "react-redux";
 
-import React, { useState } from 'react';
-import { useHistory } from "react-router-dom";
-import { connect, useDispatch } from "react-redux";
-import { previousLessonToServer } from '../services/previousLessons';
-import '../style/header.css';
-
-
-
-const Header = (props) => {
-  const history = useHistory();
-
-  const previouslessonsClick = async () => {
-
-    history.push("previousLessons");
+const Header = () => {
+    const user = useSelector(state=> state.user.user)
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+  
+  const logout=()=>{
+    localStorage.clear();
+    window.location.reload();
   }
-  const viewAttendanceClick=()=> {
-    history.push("/attendance");
-  }
-  const viewTasksClick=() =>{
-    history.push("/tasks");
-  }
-  const viewTestsClick=()=> {
-    history.push("/tests");
-  }
-  const viewHwClick=() =>{
-    history.push("/hw");
-  }
-  const newClassClick=() =>{
-    history.push("/newClassRoom", history.location.state);
-  }
+  
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
 
-  return (<div>
-    <div class="menu">
-      <img className="menu-logo " src={"/images/logo.png"} />
-      {/* <img className="menu-icon" src={"/images/att.png"} />
-    <img className="menu-icon2" src={"/images/att.png"} />
-    <img className="menu-icon3" src={"/images/att.png"} />
-    <img className="menu-icon4" src={"/images/att.png"} /> */}
-
-      {/* <img className="logo" src={"/images/logo.png"} />
-    <img className="att" src={"/images/att.png"} />
-    <img className="menu-btn " src={"/images/logo.png"} /> */}
-      <button className="menu-btn " onClick={()=>history.push('/')}  > בית </button>
-      <button className="menu-btn " onClick={()=>previouslessonsClick()}  > שיעורים קודמים </button>
-      {/* <button className="menu-btn" onClick={viewTasksClick}>  גליון ציונים  </button> */}
-      <button className="menu-btn" onClick={viewTestsClick}> מבחנים   </button>
-      <button className="menu-btn" onClick={viewHwClick}> תרגילים שהוגשו   </button>
-      <button className="menu-btn" onClick={newClassClick}>יצירת שיעור חדש </button>
-      <button className="menu-btn" onClick={viewAttendanceClick}>צפיה בנוכחות </button>
-      <div></div>
-
-    </div>
+  return (
+    <div>
+    <Avatar onClick={handleClick} >{user?.firstName && user?.firstName[0]}</Avatar>
+    <Menu
+      id="basic-menu"
+      anchorEl={anchorEl}
+      open={open}
+      onClose={handleClose}
+      MenuListProps={{
+        "aria-labelledby": "basic-button",
+      }}
+    >
+      <MenuItem onClick={logout}>Logout</MenuItem>
+    </Menu>
   </div>
   );
-
-}
-
+};
 
 export default Header;

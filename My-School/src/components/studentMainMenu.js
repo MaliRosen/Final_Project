@@ -25,7 +25,7 @@
 
 
 
-//     return (<div class="menu">
+//     return (<div className="menu">
 //         {/* <button className="previouslessons" onClick={previouslessonsClick} >  שיעורים קודמים   </button> */}
 //         <div>
 //         <img className="logo" src={"/images/logo.png"} />
@@ -53,7 +53,7 @@ import '../style/header.css';
 import '../style/headerS.css';
 
 
-const HeaderS = (props) => {
+const StudentMainMenu = (props) => {
 
   let history = useHistory();
 
@@ -119,6 +119,6 @@ const mapStateToProps = (state) => {
   };
 };
 // export default connect(mapStateToProps, {})(Login);
-export default connect(mapStateToProps, {})(HeaderS);
+export default connect(mapStateToProps, {})(StudentMainMenu);
 
 // export default Students;

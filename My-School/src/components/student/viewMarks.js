@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
 import Avatar from '@material-ui/core/Avatar';
-import HeaderS from '../headerS';
+import StudentMainMenu from '../studentMainMenu';
 import { getAllLessonsFromServer } from '../../services/getAllLessons';
 import { viewMyTestsFromServer } from '../../services/viewTests';
 import '../../style/student/s_previousLessons.css';
@@ -28,27 +28,29 @@ const ViewMarks = (props) => {
   }, [])
 
   return (<div>
-    <Avatar>{props.fname && props.fname[0]}</Avatar>
-    <HeaderS />
+    
+    <StudentMainMenu />
 
     <div className="table">
       <div className="pageTitle">ציונים מהחודש האחרון:</div>
       <table>
-        <tr class="title">
+        <tbody>
+        <tr className="title">
           <td>שם שעור </td>
           <td>ציון</td>
         </tr>
 
         {tests?.map(t => (
           <tr>
-            <td class="td2">   {t?.nameSubject}</td>
+            <td className="td2">   {t?.nameSubject}</td>
             {t['marks']?.filter((n) => n.studentId === props.id).map(a => (
               <>
-                <td class="td2"> {a?.mark}</td>
+                <td className="td2"> {a?.mark}</td>
               </>)
             )}
           </tr>
         ))}
+        </tbody>
       </table>
     </div >
   </div>

@@ -29,7 +29,7 @@ const Login = (props) => {
     if (res && res.kind) {
       // history.replace(`/teacher`,{userName});
       history.push('/');//`/${res.kind}`
-      localStorage.setItem('token',JSON.stringify({email:res.result.email, _id:res.result._id, token:res.token}))
+      localStorage.setItem('token',JSON.stringify({email:res.result?.email, _id:res.result?._id, token:res?.token}))
       dispatch({ type: "save_user", payload: {...res.result, type: res.kind} })
 
     }
@@ -46,10 +46,6 @@ const Login = (props) => {
   }
 
   return (<div className="">
-    <h1>
-      <Avatar>{props.fname}</Avatar>
-    </h1>
-    {/* <h1>fname: {props.fname}</h1> */}
     <img className="mySchool" src={"/images/mySchool.png"} />
     <img className="pprofile" src={"/images/profil.png"} />
     <div className="rectangle">

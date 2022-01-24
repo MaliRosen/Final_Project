@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useHistory } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
 import Avatar from '@material-ui/core/Avatar';
-import HeaderS from '../headerS';
+import StudentMainMenu from '../studentMainMenu';
 import UseUploadFile from '../fileReader';
 import { getAllLessonsFromServer } from '../../services/getAllLessons';
 import { postMyFileToServer } from '../../services/postMark';
@@ -18,7 +18,7 @@ const ViewHw = (props) => {
 
   const postMyHwFile = async (lessonId, studentId, file) => {
     let res = '';
-    debugger
+    
     let type = "Lessons"
     res = await postMyFileToServer({ type, lessonId, studentId, file: fileData });
     console.log("postMyHwFileToServer", res);
@@ -32,18 +32,19 @@ const ViewHw = (props) => {
   }, [])
 
   return (<div>
-    <Avatar>{props.fname && props.fname[0]}</Avatar>
-    <HeaderS />
+    
+    <StudentMainMenu />
 
 
 
     <div className="hw_table">
       <div className="table">
-        <div class="pageTitle">
+        <div className="pageTitle">
           שיעורי בית:
         </div>
         <br />
         {<table>
+          <tbody>
           <tr className="title">
             <td>שם שעור </td>
             <td>תאריך</td>
@@ -63,10 +64,10 @@ const ViewHw = (props) => {
               </td>
               <td><input type="file" onChange={onfileChange} placeholder="⬆" ></input> </td>
 
-              <button class="sendBtn" onClick={() => postMyHwFile(l._id, props.id, file)}> שלח</button>
+              <button className="sendBtn" onClick={() => postMyHwFile(l._id, props.id, file)}> שלח</button>
             </tr>
           ))}
-
+          </tbody>
         </table>}
       </div>
     </div>

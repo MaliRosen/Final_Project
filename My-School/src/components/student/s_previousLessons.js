@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { previousLessonToServer } from '../../services/previousLessons';
 import { connect, useDispatch } from "react-redux";
-import HeaderS from '../headerS';
+import StudentMainMenu from '../studentMainMenu';
 import Avatar from '@material-ui/core/Avatar';
 import '../../style/student/s_previousLessons.css';
 
@@ -11,7 +11,7 @@ const PreviousLessons = (props) => {
   let history = useHistory();
   const [lesss, setless] = useState();
 
-  useEffect(() => previousLessonToServer(props.subject).then(res => setless(res)).catch(err => alert(err)), [])
+  useEffect(() => previousLessonToServer(props.subject).then(res => res[0] && setless(res)).catch(err => alert(err)), [])
 
 
 
@@ -20,22 +20,22 @@ const PreviousLessons = (props) => {
   return (
 
     <div>
-      <Avatar>{props.fname && props.fname[0]}</Avatar>
-      <HeaderS />
+      <StudentMainMenu />
 
       <div className="table">
-        <div class="pageTitle">
+        <div className="pageTitle">
     שיעורים קודמים:
         </div>
         <br />
         <table>
-          <tr class="title">
-            <td class="td1">שם המורה</td>
-            <td class="td2">מס' שיעור</td>
-            <td class="td3">נושא</td>
-            <td class="td4">חומר לשיעור</td>
-            <td class="td5">תאריך</td>
-            <td class="td6">הערות</td>
+          <tbody>
+          <tr className="title">
+            <td className="td1">שם המורה</td>
+            <td className="td2">מס' שיעור</td>
+            <td className="td3">נושא</td>
+            <td className="td4">חומר לשיעור</td>
+            <td className="td5">תאריך</td>
+            <td className="td6">הערות</td>
 
           </tr>
 
@@ -43,17 +43,18 @@ const PreviousLessons = (props) => {
           {lesss?.map(herLess => (
             //  {lesss.filter(ls => ls.subject === props.subject).map(herLess => (
             <tr>
-              <td class="td1">   {herLess?.teacher}</td>
-              <td class="td2">   {herLess?.numLesson}</td>
-              <td class="td3">    {herLess?.lessonName}</td>
-              <td class="td4"> <a href={herLess.file} download="file"> לחץ להורדה</a> </td>
-              {/* <td class="td4"> <a href={herLess.file} download="file">להורדה</a> <iframe class="aa" src={herLess.file} frameborder="0"></iframe></td> */}
-              <td class="td5">   {herLess?.date.slice(0, 10)}</td>
-              <td class="td6"> {herLess?.notes}</td>
+              <td className="td1">   {herLess?.teacher}</td>
+              <td className="td2">   {herLess?.numLesson}</td>
+              <td className="td3">    {herLess?.lessonName}</td>
+              <td className="td4"> <a href={herLess.file} download="file"> לחץ להורדה</a> </td>
+              {/* <td className="td4"> <a href={herLess.file} download="file">להורדה</a> <iframe className="aa" src={herLess.file} frameborder="0"></iframe></td> */}
+              <td className="td5">   {herLess?.date.slice(0, 10)}</td>
+              <td className="td6"> {herLess?.notes}</td>
 
 
             </tr>
           ))}
+          </tbody>
         </table>
       </div>
     </div>

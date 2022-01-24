@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../header';
+import MainMenu from '../mainMenu';
 import { getAllStudentsFromServer } from '../../services/getAllStudent';
 import { viewTestsFromServer } from '../../services/viewTests';
 import { getAllLessonsFromServer } from '../../services/getAllLessons';
@@ -69,8 +69,8 @@ const Tasks = (props) => {
   console.log("students", students);
 
   return (<div>
-    <Avatar>{props.fname && props.fname[0]}</Avatar>
-    <Header />
+    
+    <MainMenu />
     {/* <Table></Table> */}
     {
       <table>
@@ -81,13 +81,15 @@ const Tasks = (props) => {
             </tr>
           ))}
         </thead>
+        <tbody>
         {tests?.map(t => (
           <>
-            <tr class="td1"> {t?.nameSubject}</tr>
+            <tr className="td1"> {t?.nameSubject}</tr>
             <tr>
             </tr>
           </>
         ))}
+        </tbody>
       </table>
     }
   </div>

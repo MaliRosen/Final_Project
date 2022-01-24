@@ -4,7 +4,7 @@ import '../../style/teacher/newClassRoom.css';
 import { postTestToServer } from '../../services/postTest';
 import { useHistory } from 'react-router-dom';
 import { connect, useDispatch } from "react-redux";
-import Header from '../header';
+import MainMenu from '../mainMenu';
 import Avatar from '@material-ui/core/Avatar';
 import UseUploadFile from '../fileReader';
 import '../../style/teacher/newClassRoom.css'
@@ -32,9 +32,9 @@ const NewLesson = (props) => {
 
     return (
         <>
-            <Avatar>{props.fname && props.fname[0]}</Avatar>
-            <Header />
-            <div class="all">
+            
+            <MainMenu />
+            <div className="all">
                 <div className="aa "> יצירת מבחן חדש</div>
 
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from "react-redux";
 import UseUploadFile from '../fileReader';
 import Avatar from '@material-ui/core/Avatar';
-import Header from '../header';
+import MainMenu from '../mainMenu';
 import { useHistory } from "react-router-dom";
 import { getAllTestsFromServer } from "../../services/getAllTests"
 import { viewTestsFromServer } from '../../services/viewTests';
@@ -51,50 +51,53 @@ const ViewTests = (props) => {
 
 
     return (<div>
-        <Avatar>{props.fname && props.fname[0]}</Avatar>
-        <Header />
+        
+        <MainMenu />
         <div className="wrapper">
         <div className="tableR">
-        <div class="pageTitle">
+        <div className="pageTitle">
 רשימת המבחנים:        </div>
         <br />
         {<table>
             <thead>
-                <tr class="title">
-                    <td class="td1">נושא</td>
-                    <td class="td2">תאריך </td>
+                <tr className="title">
+                    <td className="td1">נושא</td>
+                    <td className="td2">תאריך </td>
                 </tr>
             </thead>
-
+            <tbody>
             {tests?.map(test => (
                 <tr>
-                    <td class="td1"> {test?.nameSubject}</td>
-                    <td class="td2"> {test?.date.slice(0,10)}</td>
-                    <button class="sendBtn" onClick={() => tst(test.marks, test?._id)}>הנבחנים</button>
+                    <td className="td1"> {test?.nameSubject}</td>
+                    <td className="td2"> {test?.date.slice(0,10)}</td>
+                    <button className="sendBtn" onClick={() => tst(test.marks, test?._id)}>הנבחנים</button>
                 </tr>
             ))}
+            </tbody>
         </table>}
         </div>
         <div className="tableL">
-        <div class="pageTitle">
+        <div className="pageTitle">
 ציוני התלמידים:        </div>
         <br />
         {<table>
             <thead>
-                <tr class="title">
-                    <td class="td1">תלמיד</td>
-                    <td class="td2">ציון </td>
+                <tr className="title">
+                    <td className="td1">תלמיד</td>
+                    <td className="td2">ציון </td>
                 </tr>
             </thead>
+            <tbody>
             {oneTst?.map(t => (
                 <>
                     <MarkToUpdate type="Test" student={t?.studentId._id} studentName={t?.studentId.firstName} lesson={oneTstLessonName} mrk={t.mark}></MarkToUpdate>
                     {/* <tr>
-                    <td class="td1"> {t?.studentId}</td>
-                    <td class="td2"> {t?.mark}</td>
+                    <td className="td1"> {t?.studentId}</td>
+                    <td className="td2"> {t?.mark}</td>
                 </tr> */}
                 </>
             ))}
+            </tbody>
         </table>}
         </div>
         <button className="sendBtn newTest"onClick={newTest}>מבחן חדש</button>

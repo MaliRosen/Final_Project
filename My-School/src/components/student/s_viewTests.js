@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { viewTestsFromServer } from '../../services/viewTests'
 import { connect, useDispatch } from "react-redux";
 import Avatar from '@material-ui/core/Avatar';
-import HeaderS from '../headerS';
+import StudentMainMenu from '../studentMainMenu';
 import { postMyFileToServer } from '../../services/postMark';
 import UseUploadFile from '../fileReader';
 import '../../style/student/s_previousLessons.css';
@@ -18,7 +18,7 @@ const ViewTests = (props) => {
     // const [closeTest, setCloseTest] = useState(360);
 
     const postMyTestFile = async (lessonId, studentId, file) => {
-        // debugger
+        // 
         let res = '';
         // console.log(file);
         let type = "Test"
@@ -29,7 +29,7 @@ const ViewTests = (props) => {
 
 
     // const postMyTestFile = async (lessonId, studentId, file) => {
-    //     // debugger
+    //     // 
     //     let res = '';
     //     // console.log(file);
     //     let type = "Test"
@@ -54,8 +54,8 @@ const ViewTests = (props) => {
 
     return (<div>
 
-        <Avatar>{props.fname && props.fname[0]}</Avatar>
-        <HeaderS />
+        
+        <StudentMainMenu />
 
         {/* {tests.map(tst => ( 
         <a href={tst.file} download="file">downloadTest</a> <iframe src={tst.file} frameborder="0"></iframe>
@@ -71,7 +71,7 @@ const ViewTests = (props) => {
                 // setCloseTest(getDifferenceInDays(new Date(), t.date));
                 <tr>
 
-                    <td class="td1">   {t?.teacher}</td>
+                    <td className="td1">   {t?.teacher}</td>
 
                 </tr>
                 ))}
@@ -80,36 +80,39 @@ const ViewTests = (props) => {
         <div className="table">
 
 
-            <div class="pageTitle">
+            <div className="pageTitle">
                 המבחן הקרוב ביותר:        </div>
             <table>
+                <tbody>
                 {/* צריך למיין לפי תאריך רק מ התאריך הנוכחי */}
                 {<tr>
 
-                    <td class="td1">   {tests[0]?.nameSubject}</td>
-                    <td class="td3">   {tests[0]?.date.slice(0, 10)}</td>
-                    {/* <td class="td4"> <a href={tests[0]?.file} download="file">download</a> <iframe src={tests[0]?.file} frameborder="0"></iframe></td> */}
-                    <td class="td4"> <a href={tests[0]?.file} download="file">לחץ להורדה</a> </td>
+                    <td className="td1">   {tests[0]?.nameSubject}</td>
+                    <td className="td3">   {tests[0]?.date.slice(0, 10)}</td>
+                    {/* <td className="td4"> <a href={tests[0]?.file} download="file">download</a> <iframe src={tests[0]?.file} frameborder="0"></iframe></td> */}
+                    <td className="td4"> <a href={tests[0]?.file} download="file">לחץ להורדה</a> </td>
                     <td>{<input type="file" onChange={onfileChange} placeholder="⬆" ></input>} </td>
-                    <button class="sendBtn" onClick={() => postMyTestFile(tests[0]._id, props.id, file)}> שלח</button>
+                    <button className="sendBtn" onClick={() => postMyTestFile(tests[0]._id, props.id, file)}> שלח</button>
                 </tr>}
+                </tbody>
             </table>
         </div>      
         <div className="table">
 
-            <div class="pageTitle">
+            <div className="pageTitle">
                 בחודש הקרוב:        </div>
             <table>
-
+                <tbody>
                 {tests?.slice(1).map(t => (
                     <tr>
-                        <td class="td1">   {t?.nameSubject}</td>
-                        <td class="td3">   {t?.date.slice(0, 10)}</td>
-                        <td class="td4"> <a href={t?.file} download="file">לחץ להורדה</a> </td>
+                        <td className="td1">   {t?.nameSubject}</td>
+                        <td className="td3">   {t?.date.slice(0, 10)}</td>
+                        <td className="td4"> <a href={t?.file} download="file">לחץ להורדה</a> </td>
                         <td><input type="file" onChange={onfileChange} placeholder="⬆" ></input> </td>
-                        <button class="sendBtn" onClick={() => postMyTestFile(t._id, props.id, file)}> שלח</button>
+                        <button className="sendBtn" onClick={() => postMyTestFile(t._id, props.id, file)}> שלח</button>
                     </tr>
                 ))}
+                </tbody>
             </table>
 
         </div>

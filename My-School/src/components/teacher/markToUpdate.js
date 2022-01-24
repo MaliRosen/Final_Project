@@ -8,7 +8,7 @@ const MarkToUpdate = (props) => {
 
     const [mark, setMark] = useState('');
 
-    const postMark = async (id, mark, lesson) => {debugger
+    const postMark = async (id, mark, lesson) => {
         //  let teacherId = props.id;
         let marks = { id, mark };
         let type = props.type;
@@ -19,8 +19,8 @@ const MarkToUpdate = (props) => {
     let a = props.mrk;
     //  let a = 5;
     return (<tr>
-                {/* <td class="td1"> student:  {props.student.firstName}</td> */}
-                <td class="td1">  {props.studentName}</td>
+                {/* <td className="td1"> student:  {props.student.firstName}</td> */}
+                <td className="td1">  {props.studentName}</td>
                 <td>   <input type="number" min="60" max="100"
                     value={mark}
                     onChange={(e) => {
@@ -31,8 +31,8 @@ const MarkToUpdate = (props) => {
                     placeholder={a}
                 // placeholder="הכנס ציון:"
                 /></td>
-                {/* <td class="td2"> <button onClick={() => postMark(props.student._id, mark, props.lesson)}> */}
-                 <button  class="sendBtn" onClick={() => postMark(props.student, mark, props.lesson)}>
+                {/* <td className="td2"> <button onClick={() => postMark(props.student._id, mark, props.lesson)}> */}
+                 <button  className="sendBtn" onClick={() => postMark(props.student, mark, props.lesson)}>
                     לעדכון
                 </button>
             </tr>

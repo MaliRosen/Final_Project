@@ -4,7 +4,7 @@ import '../../style/teacher/newClassRoom.css';
 import { postHwToServer } from '../../services/postHw';
 import { useHistory } from 'react-router-dom';
 import { connect, useDispatch } from "react-redux";
-import Header from '../header';
+import MainMenu from '../mainMenu';
 import Avatar from '@material-ui/core/Avatar';
 import UseUploadFile from '../fileReader';
 import '../../style/teacher/newClassRoom.css'
@@ -31,7 +31,7 @@ const NewHw = (props) => {
 
 
     const postHw = async (numLesson, nameSubject, date, file, comment, question1, question2) => {
-        debugger
+        
         let res = '';
 
         res = await postHwToServer({ numLesson, nameSubject, date, file: fileData, comment, question1, question2, subject: props.subject });
@@ -47,9 +47,9 @@ const NewHw = (props) => {
 
     return (
         <>
-            <Avatar>{props.fname && props.fname[0]}</Avatar>
-            <Header />
-            <div class="all">
+            
+            <MainMenu />
+            <div className="all">
                 <div className="aa "> יצירת ש.ב. חדש</div>
 
                 <input type="text" className="a b" placeholder=":נושא"
