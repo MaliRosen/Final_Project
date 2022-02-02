@@ -43,9 +43,10 @@ class Mail {
         //הפעלת הפונקציה
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
-                console.error('error on mailSender ', error);
+                console.error('error on mailSender ', error)
+                res.status(500).json({error})
             } else {
-                console.info('Email sent: ' + info.response);
+                res.json({res:info.response});
             }
         })
     }

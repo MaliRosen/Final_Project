@@ -11,7 +11,7 @@ const PreviousLessons = (props) => {
   let history = useHistory();
   const [lesss, setless] = useState();
 
-  useEffect(() => previousLessonToServer(props.subject).then(res => res[0] && setless(res)).catch(err => alert(err)), [])
+  useEffect(() =>{if(props.subject) previousLessonToServer(props.subject).then(res => res[0] && setless(res)).catch(err => alert(err))}, [props.subject])
 
 
 
@@ -20,8 +20,6 @@ const PreviousLessons = (props) => {
   return (
 
     <div>
-      <StudentMainMenu />
-
       <div className="table">
         <div className="pageTitle">
     שיעורים קודמים:
@@ -40,9 +38,9 @@ const PreviousLessons = (props) => {
           </tr>
 
 
-          {lesss?.map(herLess => (
+          {lesss?.map((herLess,i) => (
             //  {lesss.filter(ls => ls.subject === props.subject).map(herLess => (
-            <tr>
+            <tr key={i}>
               <td className="td1">   {herLess?.teacher}</td>
               <td className="td2">   {herLess?.numLesson}</td>
               <td className="td3">    {herLess?.lessonName}</td>
@@ -50,8 +48,6 @@ const PreviousLessons = (props) => {
               {/* <td className="td4"> <a href={herLess.file} download="file">להורדה</a> <iframe className="aa" src={herLess.file} frameborder="0"></iframe></td> */}
               <td className="td5">   {herLess?.date.slice(0, 10)}</td>
               <td className="td6"> {herLess?.notes}</td>
-
-
             </tr>
           ))}
           </tbody>

@@ -13,7 +13,7 @@ const lessonsSchema = new Schema({
     subject: String,
     arrHw: [
         {
-            studentId: { type: Schema.Types.ObjectId, ref: 'student' },
+            studentId: { type: Schema.Types.ObjectId, ref: 'student', unique: true },
             mark: Number,
             file: String,
         }

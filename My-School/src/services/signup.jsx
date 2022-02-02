@@ -1,5 +1,5 @@
 export const signupToServer=(subject,firstName, lastName, id, email, password) => {
-    fetch('http://localhost:3000/users/signup', {
+  return  fetch('http://localhost:3000/users/signup', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -13,5 +13,7 @@ export const signupToServer=(subject,firstName, lastName, id, email, password) =
         email,
         password
       })
-    });
+    }).then((res) => res.json())
+    .then(data=>{;return data})
+    .catch(err=>console.log(err))
     }

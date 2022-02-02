@@ -11,3 +11,16 @@ export const postHwToServer = (data) => {
         })
     });
 }
+
+export const postHwAnswerToServer=({lessonId, studentId, file})=>{
+    return fetch('http://localhost:3000/lesson/postHwAnswer',{
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            lessonId, studentId, file
+         })      
+    })
+}

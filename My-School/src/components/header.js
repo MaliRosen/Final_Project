@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -8,7 +8,7 @@ const Header = () => {
     const user = useSelector(state=> state.user.user)
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
-  
+  useEffect(()=>{console.log('user',user);},[user])
   const logout=()=>{
     localStorage.clear();
     window.location.reload();

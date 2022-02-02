@@ -27,6 +27,7 @@ import Zoom from "./components/zoom";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { loginWithToken } from "./services/login";
+import { withRouter } from 'react-router-dom';
 
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -38,35 +39,40 @@ function App() {
   const history = useHistory();
 
   useEffect(() => {
-    if (user?.type) {
+    if (user?.type || history.location.pathname.includes('signup') || history.location.pathname.includes('login')) {
   
     } else {
       const localData = JSON.parse(localStorage.getItem("token"));
+      if(localData?.type=="admin"){
+        dispatch({ type: "save_user", payload: {type:"admin"} });
+        return;
+      }
       if (localData?.type) {
-        loginWithToken(user._id, user.token).then((res) => {
+        loginWithToken(localData._id, localData.token).then((res) => {
           if (res) {
             dispatch({ type: "save_user", payload: res });
           } else {
-            history.push("/login");
+            history.push("/login"); 
           }
         });
       } else{
-        history?.push("/login");        
+        if(!history.location.pathname.includes('signup')){
+        history.push("/login"); 
+        }       
       }
     }
-  }, [user]);
+  }, [user, history]);
 
-
-  return (
-    <Router>
-      <Header />
+  return (<>
+      {user && <Header />}
       <Route path="/">
         {user?.type == "teacher" && <TeacherEnter />}
-        {user?.type == "student" && <StudentEnter />}{" "}
+        {user?.type == "student" && <StudentEnter />}
+        {user?.type == "admin" && <Admin/>}{" "}
       </Route>
-      <Route path="/login" exact>
+       <Route path="/login" exact>login
         <Login />
-      </Route>
+      </Route> 
       <Route path="/previousLessons">
         <PreviousLessons />
       </Route>
@@ -118,19 +124,16 @@ function App() {
       <Route path="/s_marks">
         <ViewMarks />
       </Route>
-      <Route path="/admin">
-        <Admin />
-      </Route>
       <Route path="/youTube">
-        <YouTube />
+        {/* <YouTube /> */}
       </Route>
       <Route path="/reactPlayer">
         {/* <ReactPlayer /> */}
       </Route>
       <Route path="/zoom">
-        <Zoom />
+        {/* <Zoom /> */}
       </Route>
-    </Router>
+    </>
   );
 }
 

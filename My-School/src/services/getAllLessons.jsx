@@ -1,6 +1,7 @@
 
 export const getAllLessonsFromServer = (subject) => {
-    return fetch(`http://localhost:3000/allLessons?subject=${subject}`)
+  if(!subject){console.log('error');return}
+    return fetch(`http://localhost:3000/lesson/allLessons?subject=${subject}`)
     .then((res) => res.json())
     .then((data) =>{ 
       return data;

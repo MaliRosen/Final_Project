@@ -7,9 +7,11 @@ import { getAllSubjectsFromServer } from '../services/getAllSubjects';
 import { mailToServer } from '../services/mail';
 import '../style/signup.css';
 
-const Signup = (props) => {
+const Signup = () => {
+
     let history = useHistory();
     const dispatch = useDispatch()
+
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [id, setId] = useState('');
@@ -53,8 +55,9 @@ const Signup = (props) => {
         else {
             try {
 
-                const ress = await signupToServer(subject, firstName, lastName, id, email, password);
-                console.log(ress);
+                const res = await signupToServer(subject, firstName, lastName, id, email, password);
+                console.log(res);
+                localStorage.setItem('token',JSON.stringify({type:'student',email:res.result?.email, _id:res.result?._id, token:res?.token}))
                 await sendMail(email, firstName);
                 alert("ברישום בוצע בהצלחה!! ברוכים הבאים לבית סיפרנו!!!!😊😊")
                 history.push("/");
@@ -89,11 +92,11 @@ const Signup = (props) => {
             alert("הרישום נכשל😒");
         }
     }
-    function isNotEmail() {
+    const isNotEmail=()=> {
         let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return (!regEmail.test(email))
+        return false// (!regEmail.test(email))
     }
-    function onlyNumbers() {
+    const onlyNumbers=()=> {
         let regNumber = /^[0-9]$/
         return (!regNumber.test(id))
     }
@@ -107,7 +110,6 @@ const Signup = (props) => {
     //     }) % 10 === 0;
     // }
     return (<div className="">
-
 
         <img className="pic" src={"/images/sign.png"} />
         <img className="profile" src={"/images/profil.png"} />
@@ -153,7 +155,7 @@ const Signup = (props) => {
                     onBlur={() => {
                         if (onlyNumbers() ) {
                             setIdMass(true);
-                            setFlagId(true);
+                            // setFlagId(true);
                         }
                     }}
                 />
@@ -215,12 +217,12 @@ const Signup = (props) => {
                 <div >
                     <button className="button btn-shwo" onClick={() => { getAllSubjects() }} >
                         👉  לחץ כדי לבחור מקצוע
-                        {lessons && <div>
-                            {lessons.map(lesson => (
-                                <button onClick={() => { setSubject(lesson.subject) }}>{lesson.subject}  </button>
+                    </button>
+                     {lessons && <div>
+                            {lessons.map((lesson, i) => (
+                                <button key={i} onClick={() => { setSubject(lesson.subject) }}>{lesson.subject}  </button>
                             ))}
                         </div>}
-                    </button>
                 </div>
 
                 <div >
@@ -238,15 +240,6 @@ const Signup = (props) => {
 
 }
 
-const mapStateToProps = (state) => {
-    return {
-        subject: state.user?.user?.subject,
-    };
-};
-
-// export default Signup;
-//export default Signup;
-export default connect(mapStateToProps, {})(Signup);
-// connect(null, { saveUser })(
+export default Signup;
 
 

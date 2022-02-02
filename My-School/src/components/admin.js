@@ -31,12 +31,10 @@ const Admin = () => {
 
 
     return (<div>
-        {/* <h1>
-            <Avatar>{props.fname}</Avatar>
-        </h1> */}
         <img className="pic" src={"/images/sign.png"} />
         <img className="profile" src={"/images/profil.png"} />
         <div className="admin-rectangle" >
+            <h1>הכנס מורה חדש</h1>
             <div className="input_admin">
                 <input type="text" id="firstName" name="firstName"
                     placeholder=":הכנס שם פרטי"

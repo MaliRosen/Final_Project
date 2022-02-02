@@ -67,12 +67,13 @@ class Login {
       await myobj.save();
       console.log("1 document inserted");
 
-      // const token = generateAccessToken(user);
+      const token = this.generateAccessToken(myobj.email);
       // console.log("token", token);
-      return res.send();
+      return res.json({result:myobj, token:token});
 
     } catch (error) {
-      res.status(500).send(error)
+      console.log('error on signup',error);
+      res.status(500).json({error})
     }
   }
 

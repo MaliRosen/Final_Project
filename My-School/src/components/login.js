@@ -29,7 +29,7 @@ const Login = (props) => {
     if (res && res.kind) {
       // history.replace(`/teacher`,{userName});
       history.push('/');//`/${res.kind}`
-      localStorage.setItem('token',JSON.stringify({email:res.result?.email, _id:res.result?._id, token:res?.token}))
+      localStorage.setItem('token',JSON.stringify({type:res.kind,email:res.result?.email, _id:res.result?._id, token:res?.token}))
       dispatch({ type: "save_user", payload: {...res.result, type: res.kind} })
 
     }

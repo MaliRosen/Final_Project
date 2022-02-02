@@ -40,11 +40,13 @@ const Tasks = (props) => {
     })
   }, [])
   useEffect(async () => {
+    if(props.subject){
     getAllLessonsFromServer(props.subject).then((data) => {
       setLessons(data);
       console.log("getAllLessonsFromServer", lessons);
     })
-  }, [])
+    }
+  }, [props.subject])
 
 
     ;

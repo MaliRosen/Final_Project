@@ -12,7 +12,8 @@ export const viewTestsFromServer = (subject) => {
 }
 
 export const viewMyTestsFromServer = (subject,id ) => {
-    return fetch(`http://localhost:3000/myTests?subject=${subject}&id=${id}`)
+    if(!subject || !id){console.log('error'); return;}
+    return fetch(`http://localhost:3000/test/myTests?subject=${subject}&id=${id}`)
         .then((res) => res.json())
         .then((data) => {
             console.log(data);

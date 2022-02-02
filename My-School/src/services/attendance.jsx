@@ -1,5 +1,5 @@
 export const attendanceToServer = (d, userId, sub) => {
-  fetch('http://localhost:3000/attendance', {
+  fetch('http://localhost:3000/lesson/attendance', {
     method: 'POST',
     headers: {
       Accept: 'application/json',

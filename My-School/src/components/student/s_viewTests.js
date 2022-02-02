@@ -53,10 +53,6 @@ const ViewTests = (props) => {
 
 
     return (<div>
-
-        
-        <StudentMainMenu />
-
         {/* {tests.map(tst => ( 
         <a href={tst.file} download="file">downloadTest</a> <iframe src={tst.file} frameborder="0"></iframe>
         )} */}
@@ -92,7 +88,7 @@ const ViewTests = (props) => {
                     {/* <td className="td4"> <a href={tests[0]?.file} download="file">download</a> <iframe src={tests[0]?.file} frameborder="0"></iframe></td> */}
                     <td className="td4"> <a href={tests[0]?.file} download="file">לחץ להורדה</a> </td>
                     <td>{<input type="file" onChange={onfileChange} placeholder="⬆" ></input>} </td>
-                    <button className="sendBtn" onClick={() => postMyTestFile(tests[0]._id, props.id, file)}> שלח</button>
+                    <td><button className="sendBtn" onClick={() => postMyTestFile(tests[0]._id, props.id, file)}> שלח</button></td>
                 </tr>}
                 </tbody>
             </table>

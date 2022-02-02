@@ -75,6 +75,22 @@ class LessonsControllers {
     return res.send("OK");
   };
 
+
+  postHwAnswer=async(req,res)=>{
+    try{
+    const {lessonId, studentId, file, } = req.body
+    const student =await Student.findById(studentId);
+    Lessons.findByIdAndUpdate(lessonId,
+       {$push:{"arrHw":{studentId:student,file:file}}},
+       {upsert: true, new : false}
+       )
+      .then(response=> res.json({message:'OK',res:response}))
+      .catch(err=>res.status(500).json({err:err}))
+    } catch(error){
+      res.status(500).json({err:err});
+    }
+  }
+
   postHw = async (req, res) => {
     try {
       const {
@@ -88,20 +104,7 @@ class LessonsControllers {
         subject,
       } = req.body;
       var myobj = { nameSubject, date, file, comments, question1, question2 };
-      //  Lessons.updateOne({ numLesson: id }, { $addFields: { hwQuestions: myobj } }, function (err, res) {
-      // Lessons.updateOne({ _id: ObjectId(id) }, { $addFields: { hwQuestions: myobj } }, function (err, res) {
-      //Lessons.findByIdAndUpdate( ObjectId(id) ,  { hwQuestions: myobj  }, function (err, res) {
-      // Lessons.findByOneAndUpdate( { numLesson: numLesson } ,  { hwQuestions: myobj  }, function (err, res)
-      // console.log(numLesson);
-      // console.log(Lessons);
 
-      // Lessons.findByOneAndUpdate({ numLesson: numLesson }, {
-      //     $push: { hwQuestions: myobj }, function(err, res) {
-      //         if (err) throw err;
-      //         console.log("1 document inserted");
-
-      //         // const token = generateAccessToken(user);
-      //         // console.log("token", token);
       let les = await Lessons.findOne({
         numLesson: numLesson,
         subject: subject,

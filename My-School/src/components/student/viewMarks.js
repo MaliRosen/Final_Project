@@ -14,23 +14,24 @@ const ViewMarks = (props) => {
 
 
   useEffect(async () => {
+    if(props.subject){
     getAllLessonsFromServer(props.subject).then((data) => {
       setLessons(data);
       console.log("getAllLessonsFromServer", lessons);
     })
-  }, [])
+    }
+  }, [props.subject])
 
   useEffect(async () => {
+    if(props.subject){
     viewMyTestsFromServer(props.subject, props.id).then((data) => {
       setTests(data);
       console.log("viewMyTestsFromServer", data);
     })
-  }, [])
+  }
+  }, [props])
 
   return (<div>
-    
-    <StudentMainMenu />
-
     <div className="table">
       <div className="pageTitle">ציונים מהחודש האחרון:</div>
       <table>

@@ -6,7 +6,7 @@ import Avatar from '@material-ui/core/Avatar';
 import StudentMainMenu from '../studentMainMenu';
 import UseUploadFile from '../fileReader';
 import { getAllLessonsFromServer } from '../../services/getAllLessons';
-import { postMyFileToServer } from '../../services/postMark';
+import { postHwAnswerToServer } from '../../services/postHw';
 import '../../style/student/s_previousLessons.css';
 
 
@@ -16,27 +16,24 @@ const ViewHw = (props) => {
   // const { file, onfileChange } = UseUploadFile()
   const [lessons, setLessons] = useState([]);
 
-  const postMyHwFile = async (lessonId, studentId, file) => {
+  const postMyHwFile = async (lessonId, studentId) => {
     let res = '';
     
     let type = "Lessons"
-    res = await postMyFileToServer({ type, lessonId, studentId, file: fileData });
+    res = await postHwAnswerToServer({lessonId, studentId, file:fileData});
     console.log("postMyHwFileToServer", res);
   }
 
   useEffect(async () => {
+    if(props.subject){
     getAllLessonsFromServer(props.subject).then((data) => {
       setLessons(data);
       console.log("***getAllLessonsFromServer", data);
     })
-  }, [])
+  }
+  }, [props.subject])
 
   return (<div>
-    
-    <StudentMainMenu />
-
-
-
     <div className="hw_table">
       <div className="table">
         <div className="pageTitle">
@@ -56,15 +53,16 @@ const ViewHw = (props) => {
               <td>  {l.lessonName}</td>
               <td>  {l.date.slice(0, 10)}</td>
               <td >
-                {l['hwQuestions']?.map(n =>
-                  <tr>
+                {l['hwQuestions']?.map((n,i) =>
+                  <tr key={i}>
                     {/* <td > <a href={n.file} download="file">⬇</a> <iframe src={n.file} frameborder="0"></iframe></td> */}
                     <td > <a href={n.file} download="hw">לחץ להורדה</a></td>
                   </tr>)}
               </td>
               <td><input type="file" onChange={onfileChange} placeholder="⬆" ></input> </td>
-
-              <button className="sendBtn" onClick={() => postMyHwFile(l._id, props.id, file)}> שלח</button>
+<td>
+              <button className="sendBtn" onClick={() =>postMyHwFile(l._id, props.id, file)}> שלח</button>
+           </td>
             </tr>
           ))}
           </tbody>

@@ -16,6 +16,7 @@ const Schedule = (props) => {
     // }, [])
 
     useEffect(async () => {
+        if(props.subject){
         getAllScheduleFromServer(props.subject).then((data) => {
             data = data.filter(x => new Date(x.date) - new Date() > 0 && new Date(x.date) - new Date() >= 30)
             data.sort(function (a, b) {
@@ -23,12 +24,11 @@ const Schedule = (props) => {
             })
             setSchedule(data);
         })
-    }, [])
+    }
+    }, [props.subject])
 
     return (<div>
-        
-        <StudentMainMenu />
-        <div className="table">
+                <div className="table">
             <div className="pageTitle">
                 מערכת שעות:
             </div>

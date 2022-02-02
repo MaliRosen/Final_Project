@@ -23,7 +23,7 @@ const PreviousLessons = (props) => {
   useEffect(async()=>{
     let res = '';
     res = await previousLessonToServer(props.userId)
-    res = await previousLessonToServer();
+    // res = await previousLessonToServer();
     console.log("res", res)
   },[])
 
@@ -41,8 +41,6 @@ const PreviousLessons = (props) => {
 
   return (
     <div>
-      {/* 
-      <MainMenu /> */}
       <div className="table">
         <div className="pageTitle">
     שיעורים קודמים:
