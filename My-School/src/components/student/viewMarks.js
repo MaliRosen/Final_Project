@@ -11,7 +11,7 @@ const ViewMarks = (props) => {
 
   const [lessons, setLessons] = useState([]);
   const [tests, setTests] = useState([]);
-
+  const dispatch = useDispatch();
 
   useEffect(async () => {
     if(props.subject){
@@ -24,7 +24,9 @@ const ViewMarks = (props) => {
 
   useEffect(async () => {
     if(props.subject){
+      dispatch({ type: "set-loader", payload:true})
     viewMyTestsFromServer(props.subject, props.id).then((data) => {
+      dispatch({ type: "set-loader", payload:false})
       setTests(data);
       console.log("viewMyTestsFromServer", data);
     })

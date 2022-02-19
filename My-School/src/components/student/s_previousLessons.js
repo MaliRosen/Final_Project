@@ -10,8 +10,15 @@ import '../../style/student/s_previousLessons.css';
 const PreviousLessons = (props) => {
   let history = useHistory();
   const [lesss, setless] = useState();
+  const dispatch = useDispatch();
 
-  useEffect(() =>{if(props.subject) previousLessonToServer(props.subject).then(res => res[0] && setless(res)).catch(err => alert(err))}, [props.subject])
+  useEffect(() =>{if(props.subject) {
+    dispatch({ type: "set-loader", payload:true})
+    previousLessonToServer(props.subject).then(res => {
+    dispatch({ type: "set-loader", payload:false})
+      res[0] && setless(res)
+    }).catch(err => alert(err))}
+  }, [props.subject])
 
 
 

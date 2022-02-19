@@ -32,6 +32,7 @@ import { withRouter } from 'react-router-dom';
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./components/header";
+import Loading from './components/share/loading'
 
 function App() {
   const user = useSelector((state) => state.user.user);
@@ -66,6 +67,7 @@ function App() {
   return (<>
       {user && <Header />}
       <Route path="/">
+        <Loading />
         {user?.type == "teacher" && <TeacherEnter />}
         {user?.type == "student" && <StudentEnter />}
         {user?.type == "admin" && <Admin/>}{" "}
