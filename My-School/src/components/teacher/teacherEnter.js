@@ -1,5 +1,5 @@
 
-import MainMenu from "../mainMenu";
+import MainMenu from "../teacherMainMenu";
 
 const Teachers = (props) => {
 

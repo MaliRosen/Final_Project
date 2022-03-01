@@ -1,4 +1,4 @@
-export const attendanceToServer = (d, userId, sub) => {
+export const attendanceToServer = (date, userId, subject) => {
   fetch('http://localhost:3000/lesson/attendance', {
     method: 'POST',
     headers: {
@@ -6,10 +6,9 @@ export const attendanceToServer = (d, userId, sub) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      d,
+      date,
       userId,
-      sub
-
+      subject,
     })
   });
 }

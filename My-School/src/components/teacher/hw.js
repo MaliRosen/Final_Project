@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
 import { getAllHwFromServer } from '../../services/getAllHw';
 import Avatar from '@material-ui/core/Avatar';
-import MainMenu from '../mainMenu';
+import MainMenu from '../teacherMainMenu';
 import MarkToUpdate from './markToUpdate';
 import '../../style/student/s_previousLessons.css';
 
@@ -14,11 +14,12 @@ const Hw = (props) => {
     const [oneHwLessonName, setOneHwLessonName] = useState();
 
     useEffect(async () => {
-
-        getAllHwFromServer(props.subject).then((data) => {
-            setHw(data)
-        })
-    }, [])
+        if(props.subject){
+            getAllHwFromServer(props.subject).then((data) => {
+                setHw(data)
+            })
+        }
+    }, [props.subject])
 
 
     let history = useHistory();
@@ -45,11 +46,9 @@ const Hw = (props) => {
                     <tr className="title">
                         <td className="td1">שיעור</td>
                         {/* <td className="td1"> ציון תלמיד וקובץ</td> */}
-                        <tr>
                             <td >המגישים </td>
                             {/* <td className="td1">תלמיד </td>
                     <td className="td2"> ציון</td> */}
-                        </tr>
                     </tr>
 
                     {hw?.map(m => (
@@ -84,7 +83,7 @@ const Hw = (props) => {
                     {oneHw?.map(t => (
                         <tr>
                             <td > <a href={t.file} download="hw">⬇</a></td>
-                            <MarkToUpdate type="Lessons" student={t?.studentId._id} studentName={t?.studentId.firstName} lesson={oneHwLessonName} mrk={t.mark}></MarkToUpdate>
+                            <MarkToUpdate type="lesson" studentId={t?.studentId._id} studentName={t?.studentId.firstName} lessonId={oneHwLessonName} mark={t.mark}></MarkToUpdate>
                             {/* <tr>
                     <td className="td1"> {t?.studentId}</td>
                     <td className="td2"> {t?.mark}</td>

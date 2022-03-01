@@ -45,13 +45,17 @@ const ViewHw = (props) => {
           <tr className="title">
             <td>שם שעור </td>
             <td>תאריך</td>
+            <td>ציון </td>
             <td>להוריד ש.ב</td>
             <td>להעלות ש.ב</td>
           </tr>
-          {lessons?.map(l => (
+          {lessons?.map(l => {
+            let hw=l.arrHw.find(el=>el.studentId===props.id);
+             return(
             <tr>
               <td>  {l.lessonName}</td>
               <td>  {l.date.slice(0, 10)}</td>
+          <td>  {hw.mark}</td>
               <td >
                 {l['hwQuestions']?.map((n,i) =>
                   <tr key={i}>
@@ -59,12 +63,12 @@ const ViewHw = (props) => {
                     <td > <a href={n.file} download="hw">לחץ להורדה</a></td>
                   </tr>)}
               </td>
-              <td><input type="file" onChange={onfileChange} placeholder="⬆" ></input> </td>
-<td>
-              <button className="sendBtn" onClick={() =>postMyHwFile(l._id, props.id, file)}> שלח</button>
-           </td>
+              <td>{hw.mark?'שיעורי הבית כבר הוגשו ונבדקו':<input type="file" onChange={onfileChange} placeholder="⬆" ></input> }</td>
+              <td>{hw.mark?'לא ניתן לעדכן שיעורי בית בדוקים ':hw.file && <>'שיעורי הבית כבר הוגשו האם ברצונך לעדכן?'
+              <button className="sendBtn" onClick={() =>postMyHwFile(l._id, props.id, file)}> שלח</button></>
+          }</td>
             </tr>
-          ))}
+          )})}
           </tbody>
         </table>}
       </div>

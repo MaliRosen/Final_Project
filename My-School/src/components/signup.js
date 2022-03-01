@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
 import { saveUser } from "../redux/action";
 import { signupToServer } from '../services/signup';
-import { getAllSubjectsFromServer } from '../services/getAllSubjects';
+import { getAllSubjectsFromServer } from '../services/subjects';
 import { mailToServer } from '../services/mail';
 import '../style/signup.css';
 

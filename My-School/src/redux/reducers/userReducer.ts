@@ -1,6 +1,6 @@
 import { User } from '../models'
 const initialState = {
-  user: null,
+  user: {},
 }
 
 export const userReducer = (state = initialState, action:{type:string, payload:any}) => {
@@ -10,6 +10,8 @@ export const userReducer = (state = initialState, action:{type:string, payload:a
       return { ...state, user: action.payload as User };
     case "save_teacher":
       return { ...state, user: action.payload };
+      case 'update-lesson-for-student':
+      return {...state, user: {...state.user, subject: action.payload.subject} as User}
     default:
       return state;
   }

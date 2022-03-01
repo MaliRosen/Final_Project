@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
 import { previousLessonToServer } from '../services/previousLessons';
 import '../style/header.css';
@@ -32,7 +32,7 @@ const MainMenu = (props) => {
 
   return (<div>
     <div className="menu">
-      <img className="menu-logo " src={"/images/logo.png"} />
+    <Link to="/">  <img className="menu-logo " src={"/images/logo.png"} /></Link>
       {/* <img className="menu-icon" src={"/images/att.png"} />
     <img className="menu-icon2" src={"/images/att.png"} />
     <img className="menu-icon3" src={"/images/att.png"} />

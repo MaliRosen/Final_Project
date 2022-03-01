@@ -103,7 +103,7 @@ import '../../style/teacher/newClassRoom.css';
 import { newLessonToServer } from '../../services/newClassRoom';
 import { useHistory } from 'react-router-dom';
 import { connect, useDispatch } from "react-redux";
-import MainMenu from '../mainMenu';
+import MainMenu from '../teacherMainMenu';
 import Avatar from '@material-ui/core/Avatar';
 import UseUploadFile from '../fileReader';
 import '../../style/teacher/newClassRoom.css'

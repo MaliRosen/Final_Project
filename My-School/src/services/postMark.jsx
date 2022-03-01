@@ -1,14 +1,14 @@
-export const postMarkToServer = (type, marks, lessonId) => {
-  fetch('http://localhost:3000/postMark', {
+export const postMarkToServer = ( type, studentId, mark, lessonId,) => {
+  fetch(`http://localhost:3000/${type}/postMark`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      type,
-      marks,
-      lessonId
+      studentId,
+      mark,
+      lessonId,
     })
   });
 }

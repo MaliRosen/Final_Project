@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
-import MainMenu from '../mainMenu';
+import MainMenu from '../teacherMainMenu';
 import Avatar from '@material-ui/core/Avatar';
 import { previousLessonToServer } from '../../services/previousLessons';
 import '../../style/student/s_previousLessons.css';

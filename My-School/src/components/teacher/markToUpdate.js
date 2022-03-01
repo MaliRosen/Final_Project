@@ -6,21 +6,18 @@ import { connect, useDispatch } from "react-redux";
 
 const MarkToUpdate = (props) => {
 
-    const [mark, setMark] = useState('');
+    const [mark, setMark] = useState(props.mark || '');
+    const {numLesson, type,  studentId, lessonId, id, studentName}=props;
 
-    const postMark = async (id, mark, lesson) => {
-        //  let teacherId = props.id;
-        let marks = { id, mark };
-        let type = props.type;
-        // let data = await postMarkToServer(teacherId, marks, lesson);
-        let data = await postMarkToServer(type, marks, lesson);
+    const postMark = async () => {
+        let data = await postMarkToServer(type,studentId, mark, lessonId,);
         console.log("data", data);
     }
     let a = props.mrk;
-    //  let a = 5;
-    return (<tr>
+
+return (<tr>
                 {/* <td className="td1"> student:  {props.student.firstName}</td> */}
-                <td className="td1">  {props.studentName}</td>
+                <td className="td1">  {studentName}</td>
                 <td>   <input type="number" min="60" max="100"
                     value={mark}
                     onChange={(e) => {
@@ -32,7 +29,7 @@ const MarkToUpdate = (props) => {
                 // placeholder="הכנס ציון:"
                 /></td>
                 {/* <td className="td2"> <button onClick={() => postMark(props.student._id, mark, props.lesson)}> */}
-                 <button  className="sendBtn" onClick={() => postMark(props.student, mark, props.lesson)}>
+                 <button  className="sendBtn" onClick={() => postMark()}>
                     לעדכון
                 </button>
             </tr>

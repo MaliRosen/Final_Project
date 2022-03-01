@@ -33,6 +33,7 @@ const Header = () => {
         "aria-labelledby": "basic-button",
       }}
     >
+      <MenuItem >הינך מחובר כ: {user.type=='student'?'תלמיד':'מורה'}</MenuItem>
       <MenuItem onClick={logout}>Logout</MenuItem>
     </Menu>
   </div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from "react-redux";
 import UseUploadFile from '../fileReader';
 import Avatar from '@material-ui/core/Avatar';
-import MainMenu from '../mainMenu';
+import MainMenu from '../teacherMainMenu';
 import { useHistory } from "react-router-dom";
 import { getAllTestsFromServer } from "../../services/getAllTests"
 import { viewTestsFromServer } from '../../services/viewTests';

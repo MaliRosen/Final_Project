@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 // import { useHistory } from "react-router-dom";
-import MainMenu from '../mainMenu';
+import MainMenu from '../teacherMainMenu';
 import Avatar from '@material-ui/core/Avatar';
 import { connect, useDispatch } from "react-redux";
 import { getAllAttendanceFromServer } from '../../services/getAllAttendance';
@@ -13,19 +13,19 @@ const ViewAttendance = (props) => {
     useEffect(async () => {
 
         getAllAttendanceFromServer().then((data) => {
-            (setAttendance(data))
+            setAttendance(data);debugger
         })
     }, [])
 
     return (<div>
         
-        <MainMenu />
-        {/* {attendance&&attendance.map(a => (
+        {/* <MainMenu /> */}
+        {attendance&&attendance.map(a => (
         <li>
           {a?.name}
           {a?.attendance} 
         </li>
-      ))} */}
+      ))}
 
     </div>
     )

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import MainMenu from '../mainMenu';
+import MainMenu from '../teacherMainMenu';
 import { getAllStudentsFromServer } from '../../services/getAllStudent';
 import { viewTestsFromServer } from '../../services/viewTests';
 import { getAllLessonsFromServer } from '../../services/getAllLessons';

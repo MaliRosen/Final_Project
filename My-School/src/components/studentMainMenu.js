@@ -45,7 +45,7 @@
 // export default Header;
 
 import React from 'react';
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { attendanceToServer } from '../services/attendance'
 import { connect, useDispatch } from "react-redux";
 import { previousLessonToServer } from '../services/previousLessons';
@@ -84,7 +84,6 @@ const StudentMainMenu = (props) => {
     try {
       const res = await attendanceToServer(d, props.userId, props.sub,);
       console.log(res);
-      alert("ברישום בוצע בהצלחה!! ברוכים הבאים לבית סיפרנו!!!!😊😊")
       history.push("/zoom");
     }
     catch (error) {
@@ -92,12 +91,17 @@ const StudentMainMenu = (props) => {
     }
   }
 
+  const subscribeClick=()=>{
+    history.push("/subscribe");
+
+  }
+
 
   return (
     <div>
       <div className="menu">
         <div>
-          <img className="menu-logo" src={"/images/logo.png"} />
+        <Link to="/"> <img className="menu-logo" src={"/images/logo.png"} /></Link>
         </div>
         <button className=" menu-btn2" onClick={previouslessonsClick} >  שיעורים קודמים   </button>
         <button className=" menu-btn2" onClick={marksClick}> צפיה בציונים   </button>
@@ -105,6 +109,7 @@ const StudentMainMenu = (props) => {
         <button className=" menu-btn2" onClick={scheduleClick}>  מערכת שעות   </button>
         <button className=" menu-btn2" onClick={testClick}>  מבחנים  </button>
         <button className="menu-btn2" onClick={enterLessonClick}>  כניסה לשיעור  </button>
+        <button className="menu-btn2" onClick={subscribeClick}>  רישום לשיעור  </button>
       
       </div>
     </div>
@@ -113,7 +118,7 @@ const StudentMainMenu = (props) => {
 const mapStateToProps = (state) => {
 
   return {
-    userId: state.user?.user?.id,
+    userId: state.user?.user?._id,
     fname: state.user?.user?.firstName,
     sub: state.user?.user?.subject,
   };

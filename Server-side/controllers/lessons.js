@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const Student = require("../models/student");
 const Lessons = require("../models/lessons");
+const { ObjectId } = require('mongodb');
 
 class LessonsControllers {
   previousLessons = async (req, res) => {
@@ -10,7 +11,6 @@ class LessonsControllers {
       const { subject } = req.params;
       console.log("on", subject);
       let result = await Lessons.find({ subject: subject });
-      console.log("result on previousLessons ", result);
       return res.status(200).json({ result: result });
     } catch (error) {
       console.log("error on previousLessons", error);
@@ -120,39 +120,67 @@ class LessonsControllers {
       res.status(500).send(error);
     }
   };
-
-  attendance = async (req, res) => {
+  postMark = async (req, res) => {
     try {
-      const { d, userId, subject } = req.body; //Adress, phone ....
-      //Validations.
-      //Check if user exists
+      const {
+        studentId,
+        mark,
+        lessonId,
+      } = req.body;
 
-      var myobj = { d, userId };
-      // let result =  await dbo.collection("teacher").findOne() //חיפוש לי תז מורה
-      // dbo.collection("teacher").update({subject:subject}, {$set:{arrAttendance}}, {
-
-      //   arrAttendance: [myobj, ... ]
-      // })
-
-      let result = await Lessons.findOneAndUpdate({
-        subject: subject,
-        date: { $lte: new Date() },
-      });
-      // result.findOneAndUpdate("attendance")
-      // let result =  await dbo.collection("teacher").findOneAndUpdate({subject:subject},{arrAttendance: $push(myobj) }
-      //   , function (err, res) {
-      //     if (err) throw err;
-      //     console.log("1 document inserted attendance");
-      //     console.log(result);
-      //     db.close();
-      //   });
-      // const token = generateAccessToken(user);
-      // console.log("token", token);
+      let les = await Lessons.findById(lessonId);
+      // les.arrHw.push(
+      //   {
+      //       studentId: studentId,
+      //       mark: mark,
+      //   })
+      les.arrHw.find(el=>el.studentId._id==studentId).mark=mark
+      les.save();
       return res.send();
+      //     }
+      // });
     } catch (error) {
+      console.log(error);
       res.status(500).send(error);
     }
   };
+
+  attendance = async (req, res) => {
+    let lessons
+    try {
+      const {  date, userId, subject } = req.body; 
+
+      lessons = await Lessons.find({subject:subject});
+      const lesson = lessons.find(lesson=>new Date(date).toLocaleDateString()===new Date().toLocaleDateString(lesson.date))
+      if(!lesson){
+        return res.json({message:'no lesson now'});
+      }
+      if(!lesson.arrAttendance) lesson.arrAttendance=[];
+      if(!lesson.arrAttendance.find(el=>el.studentId.toString() === userId)){
+        lesson.arrAttendance.push({studentId:userId ,date, isLate: false});
+        lesson.save();
+      } else {
+        return res.json({message:'user already attendance'});
+      }
+      return res.send();
+    } catch (error) {
+      console.log('error on post attendance: ',error);
+      res.status(500).json({error:error, lessons:lessons});
+    }
+  };
+
+  updateLessonForStudent= async (req, res) => {
+    try{
+    const {userId}=req.params;
+    const {subject}=req.body
+    console.log('on subs', userId,subject);
+    await Student.findByIdAndUpdate(userId,{subject})
+    return res.json({message:'OK'});
+    } catch (error) {
+      res.status(500).json({error:error})
+    }
+
+  }
 }
 
 module.exports = new LessonsControllers();

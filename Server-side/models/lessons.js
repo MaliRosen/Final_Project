@@ -10,12 +10,19 @@ const lessonsSchema = new Schema({
     date:   Date,
     notes: String,
     time: String,
-    subject: String,
+    subject: {type: String, unique:true},
     arrHw: [
         {
             studentId: { type: Schema.Types.ObjectId, ref: 'student', unique: true },
             mark: Number,
             file: String,
+        }
+    ],
+    arrAttendance:[
+        {
+            studentId: { type: Schema.Types.ObjectId, ref: 'student', unique: true },
+            date: Date,
+            isLate: Boolean
         }
     ],
     hwQuestions: [

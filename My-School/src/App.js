@@ -3,6 +3,7 @@ import Login from "./components/login";
 import Home from "./components/home";
 import TeacherEnter from "./components/teacher/teacherEnter";
 import StudentEnter from "./components/student/studentEnter";
+import Subscribe from "./components/student/subscribe";
 import NewClassRoom from "./components/teacher/newClassRoom";
 import ViewAttendance from "./components/teacher/viewAttendance";
 import Schedule from "./components/teacher/schedule";
@@ -130,10 +131,14 @@ function App() {
         {/* <YouTube /> */}
       </Route>
       <Route path="/reactPlayer">
-        {/* <ReactPlayer /> */}
+        <ReactPlayer />
       </Route>
       <Route path="/zoom">
-        {/* <Zoom /> */}
+        <ReactPlayer />
+        <Zoom />
+      </Route>
+      <Route path="/subscribe">
+        <Subscribe />
       </Route>
     </>
   );
