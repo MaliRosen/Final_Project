@@ -1,5 +1,5 @@
 export const signupToServer=(subject,firstName, lastName, id, email, password) => {
-  return  fetch('http://localhost:3000/users/signup', {
+  return  fetch('/users/signup', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

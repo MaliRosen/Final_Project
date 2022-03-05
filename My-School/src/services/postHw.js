@@ -1,6 +1,6 @@
 export const postHwToServer = (data) => {
     
-    return fetch('http://localhost:3000/postHw', {
+    return fetch('/postHw', {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -13,7 +13,7 @@ export const postHwToServer = (data) => {
 }
 
 export const postHwAnswerToServer=({lessonId, studentId, file})=>{
-    return fetch('http://localhost:3000/lesson/postHwAnswer',{
+    return fetch('/lesson/postHwAnswer',{
         method: 'POST',
         headers: {
             Accept: 'application/json',

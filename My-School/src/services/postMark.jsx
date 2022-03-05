@@ -1,5 +1,5 @@
 export const postMarkToServer = ( type, studentId, mark, lessonId,) => {
-  fetch(`http://localhost:3000/${type}/postMark`, {
+  fetch(`/${type}/postMark`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -15,7 +15,7 @@ export const postMarkToServer = ( type, studentId, mark, lessonId,) => {
 
 export const postMyFileToServer = (data) => {
   // 
-  fetch('http://localhost:3000/test/postFile', {
+  fetch('/test/postFile', {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -29,7 +29,7 @@ export const postMyFileToServer = (data) => {
 
 // export const postMyFileToServer = (type, lessonId,studentId, file) => {
 //   
-//   fetch('http://localhost:3000/postFile', {
+//   fetch('/postFile', {
 //     method: 'POST',
 //     headers: {
 //       Accept: 'application/json',
@@ -46,7 +46,7 @@ export const postMyFileToServer = (data) => {
 
 
 // export const postMyTestFileToServer = (lessonId,studentId, file) => {
-//   fetch('http://localhost:3000/postFile', {
+//   fetch('/postFile', {
 //     method: 'POST',
 //     headers: {
 //       Accept: 'application/json',

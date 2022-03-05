@@ -1,6 +1,6 @@
 
 export const getAllMarksFromServer = (subject) => {
-    return fetch(`http://localhost:3000/allMarks?subject=${subject}`)
+    return fetch(`/allMarks?subject=${subject}`)
         .then((res) => res.json())
         .then((data) => {
             return data;

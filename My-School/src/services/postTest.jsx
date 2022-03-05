@@ -1,5 +1,5 @@
 // export const postTestToServer = (teacher, nameSubject, date, file, comment,subject) => {
-//     fetch('http://localhost:3000/postTest', {
+//     fetch('/postTest', {
 //         method: 'POST',
 //         headers: {
 //             Accept: 'application/json',
@@ -14,7 +14,7 @@
  
 export const postTestToServer = (data) => {
     
-    fetch('http://localhost:3000/test/postTest', {
+    fetch('/test/postTest', {
         method: 'POST',
         headers: {
             Accept: 'application/json',

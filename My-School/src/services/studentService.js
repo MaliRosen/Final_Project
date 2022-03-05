@@ -6,7 +6,7 @@ const student= useSelector(state=> state.user.user);
 const dispatch= useDispatch();
 
 const post=(url, body, action)=>{
-    fetch(`http://localhost:3000/${url}/${student._id}`, {
+    fetch(`/${url}/${student._id}`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

@@ -1,6 +1,6 @@
 
 export const getAllSubjectsFromServer = () => {
-    return fetch(`http://localhost:3000/teacher/allTeachers`)
+    return fetch(`/teacher/allTeachers`)
     .then((res) => res.json())
     .then((data) =>{ 
       return data;
@@ -12,7 +12,7 @@ export const getAllSubjectsFromServer = () => {
 }
 
 export const subscribeToLesson=(subject)=>{
-  fetch(`http://localhost:3000/lesson/subscribe`, {
+  fetch(`/lesson/subscribe`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',

@@ -1,5 +1,5 @@
 export const loginToServer = (user, password) => {
-  return fetch(`http://localhost:3000/users/login?user=${user}&password=${password}`)
+  return fetch(`/users/login?user=${user}&password=${password}`)
     .then((res) => res.json())
     .then((data) => {
       // let date = new Date(Date.now() + 86400e3);
@@ -14,7 +14,7 @@ export const loginToServer = (user, password) => {
 }
 
 export const loginWithToken = (id,token) => {
-  return fetch(`http://localhost:3000/users/loginWithToken` ,{
+  return fetch(`/users/loginWithToken` ,{
     method:'POST',
     body:JSON.stringify({id:id,token:token}),
     headers: {

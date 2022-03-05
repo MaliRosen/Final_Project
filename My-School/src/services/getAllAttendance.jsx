@@ -1,6 +1,6 @@
 
 export const getAllAttendanceFromServer = () => {
-    return fetch(`http://localhost:3000/lesson/allAttendance`)
+    return fetch(`/lesson/allAttendance`)
     .then((res) => res.json())
     .then((data) =>{ 
       return data;

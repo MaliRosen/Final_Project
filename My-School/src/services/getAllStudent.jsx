@@ -1,6 +1,6 @@
 
 export const getAllStudentsFromServer = (subject) => {
-    return fetch(`http://localhost:3000/allStudents?subject=${subject}`, {
+    return fetch(`/allStudents?subject=${subject}`, {
       // credentials: "include"
     })
     .then((res) => res.json())

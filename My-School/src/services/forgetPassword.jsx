@@ -1,5 +1,5 @@
 export const forgetPassword = (email, password) => {
-    fetch('http://localhost:3000/users/forgetPassword', {
+    fetch('/users/forgetPassword', {
         method: 'POST',
         headers: {
             Accept: 'application/json',
