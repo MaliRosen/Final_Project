@@ -7,10 +7,10 @@ import { connect, useDispatch } from "react-redux";
 const MarkToUpdate = (props) => {
 
     const [mark, setMark] = useState(props.mark || '');
-    const {numLesson, type,  studentId, lessonId, id, studentName}=props;
+    const { type,  student, lesson, id, studentName}=props;
 
     const postMark = async () => {
-        let data = await postMarkToServer(type,studentId, mark, lessonId,);
+        let data = await postMarkToServer(type,student, mark, lesson,);
         console.log("data", data);
     }
     let a = props.mrk;

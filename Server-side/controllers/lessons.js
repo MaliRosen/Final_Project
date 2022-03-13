@@ -44,10 +44,15 @@ class LessonsControllers {
     }
   };
 
-  allAttendance = (req, res) => {
-     Lessons.find()
-        .then(resultAttendance=>{ return res.status(200).json(resultAttendance); })
-        .catch ((error)=> { return res.status(500).json({ error: error }); })
+  allAttendance = async (req, res) => {
+    try{
+    const { subject }=req.params
+    const students=await Student.find({subject}, '_id firstName lastName')
+    const lessons= await Lessons.find({subject}, '_id lessonName date arrAttendance subject')
+
+    return res.status(200).json({students:students, lessons:lessons});
+  }catch (error) {
+    console.log('error on get allAttendance',error); return res.status(500).json({ error: error }); }
   };
 
   postLesson = async (req, res) => {
@@ -155,12 +160,13 @@ class LessonsControllers {
       if(!lesson){
         return res.json({message:'no lesson now'});
       }
+
       if(!lesson.arrAttendance) lesson.arrAttendance=[];
       if(!lesson.arrAttendance.find(el=>el.studentId.toString() === userId)){
         lesson.arrAttendance.push({studentId:userId ,date, isLate: false});
         lesson.save();
       } else {
-        return res.json({message:'user already attendance'});
+        return res.json({message:'user already attendance',lesson:lesson});
       }
       return res.send();
     } catch (error) {

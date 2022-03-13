@@ -7,7 +7,6 @@ const TestController = require("../controllers/tests")
 
 router.get("/allTests", TestController.allTests);
 router.get("/viewTest", TestController.getTests);
-router.get("/allTests", TestController.allTests);
 router.get("/myTests", TestController.myTests);
 router.post("/postMark", TestController.postMark);
 router.post("/postMarkTest", TestController.postMarkTest);

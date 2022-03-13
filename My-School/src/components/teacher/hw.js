@@ -13,10 +13,14 @@ const Hw = (props) => {
     const [oneHw, setOneHw] = useState();
     const [oneHwLessonName, setOneHwLessonName] = useState();
 
+    const dispatch = useDispatch();
+
     useEffect(async () => {
         if(props.subject){
+            dispatch({ type: "set-loader", payload:true});
             getAllHwFromServer(props.subject).then((data) => {
-                setHw(data)
+                setHw(data);
+                dispatch({ type: "set-loader", payload:false});
             })
         }
     }, [props.subject])

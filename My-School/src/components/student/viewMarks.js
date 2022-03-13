@@ -6,15 +6,17 @@ import StudentMainMenu from '../studentMainMenu';
 import { getAllLessonsFromServer } from '../../services/getAllLessons';
 import { viewMyTestsFromServer } from '../../services/viewTests';
 import '../../style/student/s_previousLessons.css';
-
+import { useStudentService } from '../../services/studentService'
 const ViewMarks = (props) => {
 
   const [lessons, setLessons] = useState([]);
   const [tests, setTests] = useState([]);
   const dispatch = useDispatch();
-
+const studentService = useStudentService()
   useEffect(async () => {
     if(props.subject){
+    let r=await  studentService.get('student/marks')
+    
     getAllLessonsFromServer(props.subject).then((data) => {
       setLessons(data);
       console.log("getAllLessonsFromServer", lessons);

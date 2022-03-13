@@ -5,5 +5,6 @@ const StudentsControllers = require("../controllers/students")
 
 
 router.get("/allStudents", StudentsControllers.allStudent);
+router.get("/marks/:studentId", StudentsControllers.getMarks);
 
 module.exports = router;

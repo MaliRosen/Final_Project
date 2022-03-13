@@ -23,18 +23,21 @@ const Login = (props) => {
 
   const login = async (userName, password) => {
 
+    dispatch({ type: "set-loader", payload:true});
     const res = await loginToServer(userName, password);
     console.log("res11111111", res);
 
     if (res && res.kind) {
       // history.replace(`/teacher`,{userName});
-      history.push('/');//`/${res.kind}`
+      history.push('/');
       localStorage.setItem('token',JSON.stringify({type:res.kind,email:res.result?.email, _id:res.result?._id, token:res?.token}))
-      dispatch({ type: "save_user", payload: {...res.result, type: res.kind} })
+      dispatch({ type: "save_user", payload: {...res.result, type: res.kind} });
+      dispatch({ type: "set-loader", payload:false});
 
     }
     else {
       alert("User not found😥😥!! please sign up.")
+      dispatch({ type: "set-loader", payload:false});
     }
   }
   const forgotPassword = () => {

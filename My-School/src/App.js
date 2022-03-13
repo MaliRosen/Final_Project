@@ -52,6 +52,9 @@ function App() {
       if (localData?.type) {
         loginWithToken(localData._id, localData.token).then((res) => {
           if (res) {
+            if(!res.subject){
+              history.push("/subscribe"); 
+            }
             dispatch({ type: "save_user", payload: res });
           } else {
             history.push("/login"); 
@@ -66,9 +69,9 @@ function App() {
   }, [user, history]);
 
   return (<>
+        <Loading />
       {user && <Header />}
       <Route path="/">
-        <Loading />
         {user?.type == "teacher" && <TeacherEnter />}
         {user?.type == "student" && <StudentEnter />}
         {user?.type == "admin" && <Admin/>}{" "}

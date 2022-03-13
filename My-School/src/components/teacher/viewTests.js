@@ -17,6 +17,7 @@ const ViewTests = (props) => {
     const [oneTst, setOneTst] = useState();
     const [oneTstLessonName, setOneTstLessonName] = useState();
 
+    const dispatch = useDispatch();
 
     // useEffect(async () => {
     //     
@@ -27,11 +28,15 @@ const ViewTests = (props) => {
     //     })
     // }, [])
     useEffect(async () => {
+        if(props.subject){
+            dispatch({ type: "set-loader", payload:true});
         viewTestsFromServer(props.subject).then((data) => {
             setTests(data);
+            dispatch({ type: "set-loader", payload:false});
             console.log("viewTests", tests);
         })
-    }, [])
+    }
+    }, [props.subject])
 
     // const { fileData, onfileChange } = UseUploadFile()
     let history = useHistory();

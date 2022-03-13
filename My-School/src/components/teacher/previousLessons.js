@@ -11,11 +11,16 @@ const PreviousLessons = (props) => {
   // 
   let history = useHistory();
   const [lesss, setless] = useState([]);
+  const dispatch =useDispatch();
   // const res = history.location.state ? history.location.state.res : [];
   useEffect(() =>{
     if(props.subject){
+      dispatch({ type: "set-loader", payload:true});
        previousLessonToServer(props.subject)
-       .then(res => res[0] && setless(res))
+       .then(res => {
+         res[0] && setless(res);
+         dispatch({ type: "set-loader", payload:false});
+       })
        .catch(err => alert(err))
     }
   }, [props.subject])

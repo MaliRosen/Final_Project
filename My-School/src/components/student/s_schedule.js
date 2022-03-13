@@ -14,14 +14,17 @@ const Schedule = (props) => {
     //         (setSchedule(data))
     //     })
     // }, [])
+    const dispatch =useDispatch();
 
     useEffect(async () => {
         if(props.subject){
+            dispatch({ type: "set-loader", payload:true})
         getAllScheduleFromServer(props.subject).then((data) => {
             data = data.filter(x => new Date(x.date) - new Date() > 0 && new Date(x.date) - new Date() >= 30)
             data.sort(function (a, b) {
                 return new Date(a.date) - new Date(b.date);
             })
+            dispatch({ type: "set-loader", payload:false})
             setSchedule(data);
         })
     }

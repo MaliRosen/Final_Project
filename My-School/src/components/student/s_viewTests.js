@@ -16,30 +16,25 @@ const ViewTests = (props) => {
     // const { file, onfileChange } = UseUploadFile()
     const [tests, setTests] = useState([]);
     // const [closeTest, setCloseTest] = useState(360);
-
+    const dispatch =useDispatch();
     const postMyTestFile = async (lessonId, studentId, file) => {
         // 
         let res = '';
         // console.log(file);
         let type = "Test"
+        dispatch({ type: "set-loader", payload:true});
         res = await postMyFileToServer({ type, lessonId, studentId, file: fileData });
+        dispatch({ type: "set-loader", payload:true});
         console.log("postMyTestFileToServer", res);
     }
 
 
 
-    // const postMyTestFile = async (lessonId, studentId, file) => {
-    //     // 
-    //     let res = '';
-    //     // console.log(file);
-    //     let type = "Test"
-    //     res = await postMyFileToServer({ type, lessonId, studentId, file });
-    //     console.log("postMyTestFileToServer", res);
-    // }
-
     useEffect(async () => {
+        if(props.subject){
+        dispatch({ type: "set-loader", payload:true})
         viewTestsFromServer(props.subject).then((data) => {
-
+            dispatch({ type: "set-loader", payload:false})
             data = data.filter(x => new Date(x.date) - new Date() > 0 && new Date(x.date) - new Date() >= 30)
             data.sort(function (a, b) {
                 return new Date(a.date) - new Date(b.date);
@@ -47,7 +42,8 @@ const ViewTests = (props) => {
             )
             setTests(data);
         })
-    }, [])
+    }
+    }, [props.subject])
 
 
 
@@ -119,7 +115,7 @@ const ViewTests = (props) => {
 }
 
 const mapStateToProps = (state) => {
-
+    
     return {
         id: state.user?.user?._id,
         fname: state.user?.user?.firstName,

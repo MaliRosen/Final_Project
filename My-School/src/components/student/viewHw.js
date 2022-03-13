@@ -15,7 +15,7 @@ const ViewHw = (props) => {
   const { fileData, onfileChange } = UseUploadFile()
   // const { file, onfileChange } = UseUploadFile()
   const [lessons, setLessons] = useState([]);
-
+  const dispatch =useDispatch();
   const postMyHwFile = async (lessonId, studentId) => {
     let res = '';
     
@@ -26,7 +26,9 @@ const ViewHw = (props) => {
 
   useEffect(async () => {
     if(props.subject){
+      dispatch({ type: "set-loader", payload:true})
     getAllLessonsFromServer(props.subject).then((data) => {
+      dispatch({ type: "set-loader", payload:false})
       setLessons(data);
       console.log("***getAllLessonsFromServer", data);
     })
@@ -55,7 +57,7 @@ const ViewHw = (props) => {
             <tr>
               <td>  {l.lessonName}</td>
               <td>  {l.date.slice(0, 10)}</td>
-          <td>  {hw.mark}</td>
+          <td>  {hw?.mark}</td>
               <td >
                 {l['hwQuestions']?.map((n,i) =>
                   <tr key={i}>
@@ -63,8 +65,8 @@ const ViewHw = (props) => {
                     <td > <a href={n.file} download="hw">לחץ להורדה</a></td>
                   </tr>)}
               </td>
-              <td>{hw.mark?'שיעורי הבית כבר הוגשו ונבדקו':<input type="file" onChange={onfileChange} placeholder="⬆" ></input> }</td>
-              <td>{hw.mark?'לא ניתן לעדכן שיעורי בית בדוקים ':hw.file && <>'שיעורי הבית כבר הוגשו האם ברצונך לעדכן?'
+              <td>{hw?.mark?'שיעורי הבית כבר הוגשו ונבדקו':<input type="file" onChange={onfileChange} placeholder="⬆" ></input> }</td>
+              <td>{hw?.mark?'לא ניתן לעדכן שיעורי בית בדוקים ':hw?.file && <>'שיעורי הבית כבר הוגשו האם ברצונך לעדכן?'
               <button className="sendBtn" onClick={() =>postMyHwFile(l._id, props.id, file)}> שלח</button></>
           }</td>
             </tr>

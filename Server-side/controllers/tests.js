@@ -10,13 +10,9 @@ class TestController {
     allTests = async (req, res) => {
         res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001');
         const subject = req.query;
-        // MongoClient.connect(url, async function (err, db) {
-        //     if (err)
-        //         return res.status(500).send(err);
-        //     var dbo = db.db("mySchoolDB");
         try {
+          console.log('req',subject,'res',await Test.find(subject) );
             let resultTest = await Test.find(subject).populate({path:"marks.studentId"});
-            // db.close();
             return res.status(200).json(resultTest);
         } catch (error) {
 
@@ -61,13 +57,11 @@ class TestController {
     }
 
     postFile = async (req, res) => {
-        try {
-    
-          
+        try {          
           const { type, lessonId, studentId, file } = req.body;
     
           let field = type === "Lessons" ? 'arrHw' : 'marks'
-          const collection =type === "Lessons" ? Lessons : Tests
+          const collection =type === "Lessons" ? Lessons : Test
     
           const obj = { studentId, file }
           console.log(lessonId);
@@ -85,18 +79,18 @@ class TestController {
       postMark = async (req, res) => {
         try {
           
-          const { type, marks, lessonId } = req.body;
+          const { type, lessonId, mark, studentId } = req.body;
           //Validations.
           //Check if  exists
           // Lessons.findByOneAndUpdate({_id:ObjectId(lessonId),"arrHw.studentId":ObjectId(studentId) }, {
           let field = type === "Lessons" ? 'arrHw' : 'marks'
-          const collection =type === "Lessons" ? Lessons : Tests
+          const collection =type === "Lessons" ? Lessons : Test
       
           let l = await collection.findById(lessonId)
-          // console.log("********", l);
-          let hw = l[field].find(x => x.studentId == marks.id);
-          console.log("marks", marks);
-          hw.mark = marks.mark;
+          console.log('id',lessonId);
+          let hw = l[field].find(x => x.studentId == studentId);
+          console.log("marks", mark);
+          hw.mark = mark;
           // console.log("hw", hw);
           l.save();
           return res.send();

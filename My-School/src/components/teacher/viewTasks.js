@@ -34,11 +34,13 @@ const Tasks = (props) => {
   }, [])
 
   useEffect(async () => {
+    if(props.subject){
     viewTestsFromServer(props.subject).then((data) => {
       setTests(data);
       console.log("viewTestsFromServer", data);
     })
-  }, [])
+  }
+  }, [props.subject])
   useEffect(async () => {
     if(props.subject){
     getAllLessonsFromServer(props.subject).then((data) => {

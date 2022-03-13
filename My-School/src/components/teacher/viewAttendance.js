@@ -8,25 +8,43 @@ import { getAllAttendanceFromServer } from '../../services/getAllAttendance';
 
 const ViewAttendance = (props) => {
 
-    const [attendance, setAttendance] = useState('');
+    const [data, setData] = useState({attendance:[],students:[], lesson:[]});
+    const dispatch = useDispatch();
 
     useEffect(async () => {
+        if(props.subject){
+            dispatch({ type: "set-loader", payload:true})
+            getAllAttendanceFromServer(props.subject).then((data) => {
+                const attendance=data.students?.map(stud=>{ 
+                    return data.lessons?.map(less=>{
+                      return {student:stud._id, Attendance: !!less.arrAttendance.find(s=>s.studentId===stud._id)}
+                    })
+                  });
+                setData({attendance,students:data.students, lessons:data.lessons});
 
-        getAllAttendanceFromServer().then((data) => {
-            setAttendance(data);debugger
-        })
-    }, [])
+                dispatch({ type: "set-loader", payload:false})
+            })
+    }
+    }, [props.subject])
 
     return (<div>
-        
-        {/* <MainMenu /> */}
-        {attendance&&attendance.map(a => (
-        <li>
-          {a?.name}
-          {a?.attendance} 
-        </li>
-      ))}
-
+        <div className="pageTitle">{data.lessons && data.lessons[0]?.subject} :גליון נוכחות עבור שיעור  </div>
+        <table className="table">
+            <thead >
+                <tr className="title">
+                    <th></th>
+                    {data.lessons?.map((less, i)=><th className={"td"+i}>{less.lessonName}</th>)}
+                </tr>
+            </thead>
+            <tbody>
+                {data.attendance?.map((a, aIndex) => (
+                    <tr>
+                        <td>{data?.students[aIndex]?.firstName} {data?.students[aIndex]?.lastName}</td>
+                        {a.map(b=><td className={"td"+aIndex}> {b.Attendance?'V':'X'}</td>)} 
+                    </tr>
+                 ))}
+            </tbody>
+        </table>
     </div>
     )
 }
