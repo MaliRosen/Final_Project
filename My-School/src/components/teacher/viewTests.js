@@ -63,7 +63,7 @@ const ViewTests = (props) => {
         <div className="pageTitle">
 רשימת המבחנים:        </div>
         <br />
-        {<table>
+        {tests.length>0?<table>
             <thead>
                 <tr className="title">
                     <td className="td1">נושא</td>
@@ -79,13 +79,13 @@ const ViewTests = (props) => {
                 </tr>
             ))}
             </tbody>
-        </table>}
+        </table>:'לא נמצאו מבחנים'}
         </div>
-        <div className="tableL">
+        {tests.length>0 && <div className="tableL">
         <div className="pageTitle">
 ציוני התלמידים:        </div>
         <br />
-        {<table>
+        <table>
             <thead>
                 <tr className="title">
                     <td className="td1">תלמיד</td>
@@ -103,8 +103,8 @@ const ViewTests = (props) => {
                 </>
             ))}
             </tbody>
-        </table>}
-        </div>
+        </table>
+        </div>}
         <button className="sendBtn newTest"onClick={newTest}>מבחן חדש</button>
 
         </div>

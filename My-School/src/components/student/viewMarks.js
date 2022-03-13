@@ -38,7 +38,7 @@ const studentService = useStudentService()
   return (<div>
     <div className="table">
       <div className="pageTitle">ציונים מהחודש האחרון:</div>
-      <table>
+      {tests.length>0?<table>
         <tbody>
         <tr className="title">
           <td>שם שעור </td>
@@ -56,7 +56,7 @@ const studentService = useStudentService()
           </tr>
         ))}
         </tbody>
-      </table>
+      </table>:'לא נמצאו ציונים'}
     </div >
   </div>
   )

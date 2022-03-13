@@ -7,6 +7,8 @@ import React, { useState, useEffect } from "react";
 import { useStudentService } from "../../services/studentService";
 import { useMySchoolService } from "../../services/mySchoolService";
 
+import '../../style/student/student.css'
+
 function Subscribe() {
   const dispatch = useDispatch();
   const studentService = useStudentService();
@@ -48,7 +50,7 @@ function Subscribe() {
           {lessons && (
             <div>
               {lessons.map((lesson, i) => (
-                <button
+                <button className="subscribe-button"
                   key={i}
                   onClick={() => {
                     setSubject(lesson.subject);

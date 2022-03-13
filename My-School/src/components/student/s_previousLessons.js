@@ -32,7 +32,7 @@ const PreviousLessons = (props) => {
     שיעורים קודמים:
         </div>
         <br />
-        <table>
+        {lesss?.length>0?<table>
           <tbody>
           <tr className="title">
             <td className="td1">שם המורה</td>
@@ -58,7 +58,7 @@ const PreviousLessons = (props) => {
             </tr>
           ))}
           </tbody>
-        </table>
+        </table>:'לא נמצאו שיעורים קודמים'}
       </div>
     </div>
   )

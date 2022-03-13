@@ -9,6 +9,7 @@ const lessonsSchema = new Schema({
     file: String,
     date:   Date,
     notes: String,
+    video: String,
     time: String,
     subject: {type: String, unique:true},
     arrHw: [

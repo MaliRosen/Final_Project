@@ -13,7 +13,7 @@ const hideLoader= () => {
 }
 const post=(url, body, action)=>{
   showLoader();
-    fetch(`http://localhost:3000/${url}/${student._id}`, {
+  return new Promise((resolve, reject)=>{ fetch(`http://localhost:3000/${url}/${student._id}`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -23,8 +23,10 @@ const post=(url, body, action)=>{
     }).then(res=>res.json())
     .then(data=>{
       hideLoader();
-        dispatch({type:action, payload:data})
+      if(action)  dispatch({type:action, payload:data});
+      resolve(data);
     })
+  });
   }
 
   

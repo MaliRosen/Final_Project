@@ -36,7 +36,7 @@ const Schedule = (props) => {
                 מערכת שעות:
             </div>
             <br />
-            <table>
+            {schedule.length>0?<table>
                 <thead>
                     <tr className="title">
                         <td className="td2">תאריך </td>
@@ -51,7 +51,7 @@ const Schedule = (props) => {
                     </tr>
                 ))}
                 </tbody>
-            </table>
+            </table>:'לא נמצאו שיעורים עתידיים'}
         </div>
     </div>
     )

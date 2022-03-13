@@ -48,7 +48,7 @@ const Login = (props) => {
     history.push("/signup");
   }
 
-  return (<div className="">
+  return (<div className="login-container">
     <img className="mySchool" src={"/images/mySchool.png"} />
     <img className="pprofile" src={"/images/profil.png"} />
     <div className="rectangle">

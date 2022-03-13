@@ -51,7 +51,7 @@ const PreviousLessons = (props) => {
     שיעורים קודמים:
         </div>
         <br />
-        <table>
+        {lesss?.length>0?<table>
           <thead>
             <tr className="title">
               <td className="td2">מס שעור</td>
@@ -67,7 +67,7 @@ const PreviousLessons = (props) => {
               <td className="td2"> {herLess?.numLesson}</td>
               <td className="td2"> {herLess?.lessonName}</td>
               {/* <td> {herLess?.file}</td> */}
-              <td className="td3"> {herLess?.date.slice(0,10)}</td>
+              <td className="td3"> {herLess?.date?.slice(0,10)}</td>
               <td className="td4"> {herLess?.notes}</td>
               <td className="td2"> {herLess?.time}</td>
               {/* {  <button onClick={()=>goToHw(herLess._id)}>שעורי בית להכניס  </button>} */}
@@ -75,7 +75,7 @@ const PreviousLessons = (props) => {
             </tr>
           ))}
           </tbody>
-        </table>
+        </table>:'לא נמצאו שיעורים קודמים'}
       </div>
     </div>
   )

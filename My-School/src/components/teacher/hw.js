@@ -45,7 +45,7 @@ const Hw = (props) => {
                 <div className="pageTitle">
 רשימת התרגילים:                </div>
                 <br />
-                {<table>
+                {hw.length>0? <table>
                     <tbody>
                     <tr className="title">
                         <td className="td1">שיעור</td>
@@ -68,15 +68,14 @@ const Hw = (props) => {
                         </tr>
                     ))}
                     </tbody>
-                </table>}
+                </table>:'לא נמצאו תרגילים'}
             </div>
 
 
-            <div className="tableL">
-                <div className="pageTitle">
-ציוני התלמידים:                </div>
+            {hw.length>0 &&<div className="tableL">
+                <div className="pageTitle">ציוני התלמידים:                </div>
                 <br />
-                {<table>
+                <table>
                     <thead>
                         <tr className="title">
                             <td className="td1">קובץ</td>
@@ -87,7 +86,7 @@ const Hw = (props) => {
                     {oneHw?.map(t => (
                         <tr>
                             <td > <a href={t.file} download="hw">⬇</a></td>
-                            <MarkToUpdate type="lesson" studentId={t?.studentId._id} studentName={t?.studentId.firstName} lessonId={oneHwLessonName} mark={t.mark}></MarkToUpdate>
+                            <MarkToUpdate type="lesson" studentId={t?.studentId?._id} studentName={t?.studentId.firstName} lessonId={oneHwLessonName} mark={t.mark}></MarkToUpdate>
                             {/* <tr>
                     <td className="td1"> {t?.studentId}</td>
                     <td className="td2"> {t?.mark}</td>
@@ -95,8 +94,8 @@ const Hw = (props) => {
                         </tr>
                     ))}
                     </tbody>
-                </table>}
-            </div>
+                </table>
+            </div>}
             <button className="sendBtn newTest" onClick={newHw}> שעורי בית חדשים </button>
         </div>
     </div>

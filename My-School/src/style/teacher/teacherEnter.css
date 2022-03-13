@@ -122,3 +122,8 @@ color: #000000;
     left:910px;
     z-index: 1;
 } */
+
+.home-container{
+    display: flex;
+}
+

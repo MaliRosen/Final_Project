@@ -82,8 +82,8 @@ const StudentMainMenu = (props) => {
   const enterLessonClick = async () => {
     let d = new Date();
     try {
-      const res = await attendanceToServer(d, props.userId, props.sub,);
-      console.log(res);
+      // const res = await attendanceToServer(d, props.userId, props.sub,);
+      // console.log(res);
       history.push("/zoom");
     }
     catch (error) {

@@ -14,7 +14,7 @@ router.post("/postLesson", lessonsControllers.postLesson);
 router.post("/postHw", lessonsControllers.postHw);
 router.post("/postMark", lessonsControllers.postMark);
 router.post("/postHwAnswer", lessonsControllers.postHwAnswer);
-router.post("/attendance", lessonsControllers.attendance);
+router.post("/attendance/:userId", lessonsControllers.attendance);
 router.post("/subscribe/:userId", lessonsControllers.updateLessonForStudent);
 
 module.exports = router;

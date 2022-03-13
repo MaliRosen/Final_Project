@@ -27,9 +27,9 @@ const ViewAttendance = (props) => {
     }
     }, [props.subject])
 
-    return (<div>
-        <div className="pageTitle">{data.lessons && data.lessons[0]?.subject} :גליון נוכחות עבור שיעור  </div>
-        <table className="table">
+    return (<div className="table">
+        <div className="pageTitle">גליון נוכחות עבור שיעור: {data.lessons && data.lessons[0]?.subject}  </div>
+        {data.lessons?.length>0? <table className="table">
             <thead >
                 <tr className="title">
                     <th></th>
@@ -44,7 +44,7 @@ const ViewAttendance = (props) => {
                     </tr>
                  ))}
             </tbody>
-        </table>
+        </table>:' לא נמצאו שיעורים'}
     </div>
     )
 }

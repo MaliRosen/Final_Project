@@ -42,7 +42,7 @@ const ViewHw = (props) => {
           שיעורי בית:
         </div>
         <br />
-        {<table>
+        {lessons.length>0? <table>
           <tbody>
           <tr className="title">
             <td>שם שעור </td>
@@ -72,7 +72,7 @@ const ViewHw = (props) => {
             </tr>
           )})}
           </tbody>
-        </table>}
+        </table>: 'לא נמצאו שיעורי בית'}
       </div>
     </div>
   </div>

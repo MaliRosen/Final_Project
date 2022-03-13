@@ -1,6 +1,4 @@
-// var MongoClient = require('mongodb').MongoClient;
 const jwt = require("jsonwebtoken");
-// var url = "mongodb://localhost:27017/mySchoolDB";
 const Test = require('../models/test');
 const { ObjectId } = require('mongodb');
 
@@ -11,39 +9,23 @@ class TestController {
         res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001');
         const subject = req.query;
         try {
-          console.log('req',subject,'res',await Test.find(subject) );
             let resultTest = await Test.find(subject).populate({path:"marks.studentId"});
             return res.status(200).json(resultTest);
         } catch (error) {
 
             return res.status(500).json({ error: error })
         }
-        // });
     }
     myTests = async (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001');
-        const subject = req.query.subject;
-        const id = req.query.id;
 
-        // MongoClient.connect(url, async function (err, db) {
-        //     if (err)
-        //         return res.status(500).send(err);
-        //     var dbo = db.db("mySchoolDB");
-        try {
-            let resultTest = await Test.find({ subject:subject, "marks.studentId":ObjectId(id)})
-            // .populate({
-            //     path: 'marks',
-            //     match: { studentId: { $e: id } },
-            //     // select: 'name -_id'
-            //   })
-            // . populate(marks);
-            // db.close();
-            return res.status(200).json(resultTest);
-        } catch (error) {
-
-            return res.status(500).json({ error: error })
-        }
-        // });
+      const subject = req.query.subject;
+      const id = req.query.id;
+      try {
+        let resultTest = await Test.find({ subject:subject, "marks.studentId":ObjectId(id)})
+        return res.status(200).json(resultTest);
+      } catch (error) {
+        return res.status(500).json({ error: error })
+      }
     }
 
     getTests = async (req, res) => {

@@ -51,17 +51,20 @@ function App() {
       }
       if (localData?.type) {
         loginWithToken(localData._id, localData.token).then((res) => {
-          if (res) {
+          if (res && res.type) {
+            dispatch({ type: "save_user", payload: res });
             if(!res.subject){
               history.push("/subscribe"); 
             }
-            dispatch({ type: "save_user", payload: res });
           } else {
+            dispatch({ type: "save_user", payload: null });
+              localStorage.clear();
             history.push("/login"); 
           }
         });
       } else{
         if(!history.location.pathname.includes('signup')){
+          dispatch({ type: "save_user", payload: null });
         history.push("/login"); 
         }       
       }
@@ -76,7 +79,7 @@ function App() {
         {user?.type == "student" && <StudentEnter />}
         {user?.type == "admin" && <Admin/>}{" "}
       </Route>
-       <Route path="/login" exact>login
+       <Route path="/login" exact>
         <Login />
       </Route> 
       <Route path="/previousLessons">
@@ -137,7 +140,7 @@ function App() {
         <ReactPlayer />
       </Route>
       <Route path="/zoom">
-        <ReactPlayer />
+        {/* <ReactPlayer /> */}
         <Zoom />
       </Route>
       <Route path="/subscribe">

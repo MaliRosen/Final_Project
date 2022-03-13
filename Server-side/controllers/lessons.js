@@ -56,28 +56,35 @@ class LessonsControllers {
   };
 
   postLesson = async (req, res) => {
-    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001');
-    const { teacher, numLesson, lessonName, file, date, notes, time, subject } =
-      req.body; //Adress, phone ....
+  try{
+    const { teacher, lessonName, file, date, notes, time, subject, video } =  req.body; //Adress, phone ....
     //Validations.
     //Check if user exists
     var arrHw = [];
+
+    const numLesson =(await Lessons.find({subject:subject})?.length || 0)+1
+    console.log('numLesson ',numLesson);
     var myobj = new Lessons({
       teacher,
-      numLesson,
       lessonName,
       file,
+      numLesson,
       date,
       notes,
       time,
       subject,
       arrHw,
+      video
     });
     await myobj.save();
     console.log("1 document inserted");
 
     // const token = generateAccessToken(user);
     return res.send("OK");
+  } catch (error) {
+    console.log('error on post lesson:', error);
+    res.status(400).json({error: error});
+  }
   };
 
 
@@ -153,10 +160,13 @@ class LessonsControllers {
   attendance = async (req, res) => {
     let lessons
     try {
-      const {  date, userId, subject } = req.body; 
+      const { userId } = req.params
+      const {  date, subject } = req.body; 
 
       lessons = await Lessons.find({subject:subject});
-      const lesson = lessons.find(lesson=>new Date(date).toLocaleDateString()===new Date().toLocaleDateString(lesson.date))
+      console.log('date:', new Date(date).toLocaleDateString())
+      console.log('dates:', lessons.map(lesson=>new Date(lesson.date).toLocaleDateString()));
+      const lesson = lessons.find(lesson=>new Date(date).toLocaleDateString()===new Date(lesson.date).toLocaleDateString())
       if(!lesson){
         return res.json({message:'no lesson now'});
       }
@@ -168,7 +178,7 @@ class LessonsControllers {
       } else {
         return res.json({message:'user already attendance',lesson:lesson});
       }
-      return res.send();
+      return res.json({message:'attendanced successfully', lesson:lesson});
     } catch (error) {
       console.log('error on post attendance: ',error);
       res.status(500).json({error:error, lessons:lessons});
@@ -181,7 +191,7 @@ class LessonsControllers {
     const {subject}=req.body
     console.log('on subs', userId,subject);
     await Student.findByIdAndUpdate(userId,{subject})
-    return res.json({message:'OK'});
+    return res.json({message:'OK', subject:subject});
     } catch (error) {
       res.status(500).json({error:error})
     }

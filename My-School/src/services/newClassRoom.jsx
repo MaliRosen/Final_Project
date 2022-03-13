@@ -19,5 +19,6 @@ fetch('http://localhost:3000/lesson/postLesson/', {
   body: JSON.stringify({
   ...data
   })
-});
+}).then(res=>{alert("lesson send to server👍👍👍");})
+.catch((err) => {console.log('fetch faild error: ' + err); alert(" נכשל😒");})
 }

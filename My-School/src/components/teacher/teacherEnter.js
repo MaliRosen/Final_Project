@@ -1,12 +1,11 @@
 
 import MainMenu from "../teacherMainMenu";
+import PreviousLessons from "./previousLessons";
 
 const Teachers = (props) => {
 
   return (
-    <div>
-      <MainMenu />
-    </div>
+    <MainMenu />
   );
 };
 

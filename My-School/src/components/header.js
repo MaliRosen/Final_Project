@@ -37,13 +37,21 @@ const Header = () => {
           "aria-labelledby": "basic-button",
         }}
       >
+      <MenuItem>
+        שלום {user.firstName}
+      </MenuItem>
         <MenuItem>
-          הינך מחובר כ: {user.type == "student" ? "תלמיד" : "מורה"}
+          הינך מחובר/ת כ: {user.type == "student" ? STUDENT :user.type=="teacher"? TEACHER : user.type=="admin" && ADMIN}
         </MenuItem>
-        <MenuItem onClick={logout}>Logout</MenuItem>
+        <MenuItem onClick={logout}>התנתקות</MenuItem>
       </Menu>
     </div>
   );
 };
 
 export default Header;
+
+
+const STUDENT='תלמיד';
+const TEACHER='מורה';
+const ADMIN = 'מנהל';
