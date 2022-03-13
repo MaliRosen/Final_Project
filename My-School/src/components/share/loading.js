@@ -1,11 +1,15 @@
-import {useSelector} from 'react-redux'
-import React, { useState, useEffect } from "react";
-import CircularProgress from '@material-ui/core/CircularProgress';
-import './share.css'
+import { useSelector } from "react-redux";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import "../../style/share.css";
 
-export default function Loading(){
-    const showLoader =useSelector(state=>{; return state.loader})
+export default function Loading() {
+  const showLoader = useSelector(state => state.loader);
 
-    return  showLoader? <div className="loader-backdrop"> <CircularProgress disableShrink /></div>: ''
-  
+  return showLoader ? (
+    <div className="loader-backdrop">
+      <CircularProgress disableShrink />
+    </div>
+  ) : (
+    ""
+  );
 }

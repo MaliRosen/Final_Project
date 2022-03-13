@@ -1,16 +1,18 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { useSelector } from "react-redux";
 
+import CONSTANTS from "../constants.js"
+
 const Header = () => {
+
   const user = useSelector((state) => state.user.user);
   const [anchorEl, setAnchorEl] = useState(null);
+
   const open = Boolean(anchorEl);
-  useEffect(() => {
-    console.log("user", user);
-  }, [user]);
+  
   const logout = () => {
     localStorage.clear();
     window.location.reload();
@@ -19,6 +21,7 @@ const Header = () => {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -37,11 +40,14 @@ const Header = () => {
           "aria-labelledby": "basic-button",
         }}
       >
-      <MenuItem>
-        שלום {user.firstName}
-      </MenuItem>
+        <MenuItem>שלום {user.firstName}</MenuItem>
         <MenuItem>
-          הינך מחובר/ת כ: {user.type == "student" ? STUDENT :user.type=="teacher"? TEACHER : user.type=="admin" && ADMIN}
+          הינך מחובר/ת כ:
+          {user.type == CONSTANTS.TYPE.STUDENT
+            ? CONSTANTS.TEXT.STUDENT
+            : user.type == CONSTANTS.TYPE.TEACHER
+            ? CONSTANTS.TEXT.TEACHER
+            : user.type == CONSTANTS.TYPE.ADMIN && CONSTANTS.TEXT.ADMIN}
         </MenuItem>
         <MenuItem onClick={logout}>התנתקות</MenuItem>
       </Menu>
@@ -50,8 +56,3 @@ const Header = () => {
 };
 
 export default Header;
-
-
-const STUDENT='תלמיד';
-const TEACHER='מורה';
-const ADMIN = 'מנהל';

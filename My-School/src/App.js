@@ -1,4 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, Route } from "react-router-dom";
+
 import Login from "./components/login";
 import Home from "./components/home";
 import TeacherEnter from "./components/teacher/teacherEnter";
@@ -15,73 +18,78 @@ import NewTest from "./components/teacher/newTest";
 import NewHw from "./components/teacher/newHw";
 import ForgotPassword from "./components/forgotPassword";
 import Signup from "./components/signup";
-
 import S_previousLessons from "./components/student/s_previousLessons";
 import S_schedule from "./components/student/s_schedule";
 import S_viewTests from "./components/student/s_viewTests";
 import ViewHw from "./components/student/viewHw";
 import ViewMarks from "./components/student/viewMarks";
 import Admin from "./components/admin";
-import YouTube from "./components/youTube";
-import ReactPlayer from "./components/youTube";
 import Zoom from "./components/zoom";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { loginWithToken } from "./services/login";
-import { withRouter } from 'react-router-dom';
-
-import "./App.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./components/header";
-import Loading from './components/share/loading'
+import Loading from "./components/share/loading";
+
+import { loginWithToken } from "./services/login";
+import "./App.css";
+import CONSTANTS from "./constants.js";
 
 function App() {
-  const user = useSelector((state) => state.user.user);
+  
   const dispatch = useDispatch();
   const history = useHistory();
+  const user = useSelector((state) => state.user.user);
 
-  useEffect(() => {
-    if (user?.type || history.location.pathname.includes('signup') || history.location.pathname.includes('login')) {
-  
-    } else {
+  useEffect(() => {debugger
+    if(history.location.pathname.includes("signup") || history.location.pathname.includes("login")){
+      return;
+    }
+    if (!user?.type) {
       const localData = JSON.parse(localStorage.getItem("token"));
-      if(localData?.type=="admin"){
-        dispatch({ type: "save_user", payload: {type:"admin"} });
+      if (localData?.type ==CONSTANTS.TYPE.ADMIN) {
+        dispatch({ type: "save_user", payload: { type: CONSTANTS.TYPE.ADMIN } });
         return;
       }
-      if (localData?.type) {
-        loginWithToken(localData._id, localData.token).then((res) => {
-          if (res && res.type) {
+      if (localData?.token) {
+        loginWithToken(localData._id, localData.token).then(res => {
+          if (res?.type) {
             dispatch({ type: "save_user", payload: res });
-            if(!res.subject){
-              history.push("/subscribe"); 
+            if (!res?.subject) {
+              history.push("/subscribe");
             }
           } else {
             dispatch({ type: "save_user", payload: null });
-              localStorage.clear();
-            history.push("/login"); 
+            localStorage.clear();
+            history.push("/login");
           }
         });
-      } else{
-        if(!history.location.pathname.includes('signup')){
-          dispatch({ type: "save_user", payload: null });
-        history.push("/login"); 
-        }       
+      } else {
+        dispatch({ type: "save_user", payload: null });
+        history.push("/login");
       }
     }
   }, [user, history]);
 
-  return (<>
-        <Loading />
+  return (
+    <>
+      <Loading />
       {user && <Header />}
       <Route path="/">
-        {user?.type == "teacher" && <TeacherEnter />}
-        {user?.type == "student" && <StudentEnter />}
-        {user?.type == "admin" && <Admin/>}{" "}
+        {user?.type == CONSTANTS.TYPE.TEACHER && <TeacherEnter />}
+        {user?.type == CONSTANTS.TYPE.STUDENT && <StudentEnter />}
+        {user?.type == CONSTANTS.TYPE.ADMIN && history.push("/admin")}
       </Route>
-       <Route path="/login" exact>
+      <Route exact path="/">
+        <Home />
+      </Route>
+      <Route exact path="/admin">
+        {user?.type == CONSTANTS.TYPE.ADMIN ? (
+          <Admin />
+        ) : (
+          "אין לך הרשאה מתאימה עבור כניסה לדף זה"
+        )}
+      </Route>
+      <Route path="/login" exact>
         <Login />
-      </Route> 
+      </Route>
       <Route path="/previousLessons">
         <PreviousLessons />
       </Route>
@@ -103,11 +111,9 @@ function App() {
       <Route path="/newHw">
         <NewHw />
       </Route>
-
       <Route path="/hw">
         <Hw />
       </Route>
-
       <Route path="/forgotPassword">
         <ForgotPassword />
       </Route>
@@ -117,7 +123,6 @@ function App() {
       <Route path="/schedule">
         <Schedule />
       </Route>
-
       <Route path="/s_previousLessons">
         <S_previousLessons />
       </Route>
@@ -133,14 +138,7 @@ function App() {
       <Route path="/s_marks">
         <ViewMarks />
       </Route>
-      <Route path="/youTube">
-        {/* <YouTube /> */}
-      </Route>
-      <Route path="/reactPlayer">
-        <ReactPlayer />
-      </Route>
       <Route path="/zoom">
-        {/* <ReactPlayer /> */}
         <Zoom />
       </Route>
       <Route path="/subscribe">

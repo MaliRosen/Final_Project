@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
 import { loginToServer } from '../services/login';
-import Avatar from '@material-ui/core/Avatar';
+
 import '../style/login.css';
-const Login = (props) => {
+
+function Login() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [userName, setUserName] = useState('');
@@ -26,18 +27,16 @@ const Login = (props) => {
     dispatch({ type: "set-loader", payload:true});
     const res = await loginToServer(userName, password);
     console.log("res11111111", res);
+    dispatch({ type: "set-loader", payload:false});
 
     if (res && res.kind) {
-      // history.replace(`/teacher`,{userName});
       history.push('/');
       localStorage.setItem('token',JSON.stringify({type:res.kind,email:res.result?.email, _id:res.result?._id, token:res?.token}))
       dispatch({ type: "save_user", payload: {...res.result, type: res.kind} });
-      dispatch({ type: "set-loader", payload:false});
 
     }
     else {
       alert("User not found😥😥!! please sign up.")
-      dispatch({ type: "set-loader", payload:false});
     }
   }
   const forgotPassword = () => {
@@ -100,4 +99,3 @@ const mapStateToProps = (state) => {
 };
 export default connect(mapStateToProps, {})(Login);
 
-// export default Login;

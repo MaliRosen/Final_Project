@@ -11,7 +11,7 @@ import MarkToUpdate from './markToUpdate';
 
 const Tasks = (props) => {
 
-  const [students, setStudents] = useState('');
+  const [students, setStudents] = useState([]);
   const [item, setItem] = useState({});
   const [show, setShow] = useState(false);
   const [mark, setMark] = useState('');
@@ -19,7 +19,7 @@ const Tasks = (props) => {
   let res = "";
   let res2 = "";
 
-  const [lessons, setLessons] = useState("");
+  const [lessons, setLessons] = useState([]);
   const [lessHw, setLessHw] = useState('');
   const [marks, setMarks] = useState([]);
   const [tests, setTests] = useState([]);
@@ -27,11 +27,13 @@ const Tasks = (props) => {
   const [oneTst, setOneTst] = useState();
 
   useEffect(async () => {
+    if(props.subject){
     getAllStudentsFromServer(props.subject).then((data) => {
-      (setStudents(data))
+      setStudents(data)
       console.log("getAllStudentsFromServer", data);
     })
-  }, [])
+  }
+  }, [props.subject])
 
   useEffect(async () => {
     if(props.subject){
