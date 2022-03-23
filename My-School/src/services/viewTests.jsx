@@ -1,5 +1,5 @@
 export const viewTestsFromServer = (subject) => {
-    return fetch(`http://localhost:3000/test/allTests?subject=${subject}`)
+    return fetch(`http://localhost:3000/test/allTests/${subject}`)
         .then((res) => res.json())
         .then((data) => {
             console.log(data);

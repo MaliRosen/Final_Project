@@ -11,10 +11,10 @@ const lessonsSchema = new Schema({
     notes: String,
     video: String,
     time: String,
-    subject: {type: String, unique:true},
+    subject: {type: String},
     arrHw: [
         {
-            studentId: { type: Schema.Types.ObjectId, ref: 'student', unique: true },
+            studentId: { type: Schema.Types.ObjectId, ref: 'student' },
             mark: Number,
             file: String,
         }

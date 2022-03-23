@@ -6,10 +6,10 @@ class TestController {
 
 
     allTests = async (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001');
-        const subject = req.query;
+        const subject = req.params.subject;
+        console.log('sub',subject);
         try {
-            let resultTest = await Test.find(subject).populate({path:"marks.studentId"});
+            let resultTest = await Test.find({subject}).populate({path:"marks.studentId"});
             return res.status(200).json(resultTest);
         } catch (error) {
 

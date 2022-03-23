@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, Route } from "react-router-dom";
+import { useHistory, Route, Redirect } from "react-router-dom";
 
 import Login from "./components/login";
 import Home from "./components/home";
@@ -23,7 +23,7 @@ import S_schedule from "./components/student/s_schedule";
 import S_viewTests from "./components/student/s_viewTests";
 import ViewHw from "./components/student/viewHw";
 import ViewMarks from "./components/student/viewMarks";
-import Admin from "./components/admin";
+import AdminMainMenu from "./components/adminMainMenu";
 import Zoom from "./components/zoom";
 import Header from "./components/header";
 import Loading from "./components/share/loading";
@@ -38,7 +38,7 @@ function App() {
   const history = useHistory();
   const user = useSelector((state) => state.user.user);
 
-  useEffect(() => {debugger
+  useEffect(() => {
     if(history.location.pathname.includes("signup") || history.location.pathname.includes("login")){
       return;
     }
@@ -75,14 +75,14 @@ function App() {
       <Route path="/">
         {user?.type == CONSTANTS.TYPE.TEACHER && <TeacherEnter />}
         {user?.type == CONSTANTS.TYPE.STUDENT && <StudentEnter />}
-        {user?.type == CONSTANTS.TYPE.ADMIN && history.push("/admin")}
+        {user?.type == CONSTANTS.TYPE.ADMIN && <Redirect to="/admin" />}
       </Route>
       <Route exact path="/">
         <Home />
       </Route>
-      <Route exact path="/admin">
+      <Route path="/admin">
         {user?.type == CONSTANTS.TYPE.ADMIN ? (
-          <Admin />
+        <AdminMainMenu />
         ) : (
           "אין לך הרשאה מתאימה עבור כניסה לדף זה"
         )}
@@ -138,7 +138,7 @@ function App() {
       <Route path="/s_marks">
         <ViewMarks />
       </Route>
-      <Route path="/zoom">
+      <Route path="/zoom/:lessonId">
         <Zoom />
       </Route>
       <Route path="/subscribe">

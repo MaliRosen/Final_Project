@@ -5,25 +5,23 @@ const Test =require('../models/test')
 
 class StudentsControllers {
     
-    allStudent = async (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001');
+    getAllBysubject = async (req, res) => {
         const subject = req.query;
-        // MongoClient.connect(url, async function (err, db) {
-        //     if (err)
-        //         return res.status(500).send(err);
-        //     var dbo = db.db("mySchoolDB");
         try {
-
-
-            //   let resultTeacher =await  dbo.collection("teacher").find({teacher:resultTeacher.subject}).toArray();
             let resultTeacher = await Student.find(subject);
-            // db.close();
             return res.status(200).json(resultTeacher);
         } catch (error) {
 
             return res.status(500).json({ error: error })
         }
-        // });
+    }
+    getAll = async (req, res) => {
+        try {
+            let resultStudent = await Student.find();
+            return res.status(200).json({resultStudent:resultStudent});
+        } catch (error) {
+            return res.status(500).json({ error: error })
+        }
     }
    
     getMarks= async (req, res) => {
@@ -37,6 +35,13 @@ class StudentsControllers {
             res.status(500).json({error:error})
         })
     }
+
+    deleteById = (req, res) => {
+        const { studentId } = req.params;
+        Student.findByIdAndDelete(studentId)
+          .then(() => {res.json({message:'ok'})})
+          .catch(err=>res.status(500).json({err:err}))
+      }
 }
 
 

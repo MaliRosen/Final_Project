@@ -13,9 +13,9 @@ export const postMarkToServer = ( type, studentId, mark, lessonId,) => {
   });
 }
 
-export const postMyFileToServer = (data) => {
+export const postMyFileToServer = async(data) => {
   // 
-  fetch('http://localhost:3000/test/postFile', {
+  await fetch('http://localhost:3000/test/postFile', {
     method: 'POST',
     headers: {
       Accept: 'application/json',

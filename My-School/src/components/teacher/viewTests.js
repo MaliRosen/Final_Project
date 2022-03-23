@@ -93,7 +93,7 @@ const ViewTests = (props) => {
                 </tr>
             </thead>
             <tbody>
-            {oneTst?.map(t => (
+            {oneTst?.length > 0 ? oneTst.map(t => (
                 <>
                     <MarkToUpdate type="Test" student={t?.studentId._id} studentName={t?.studentId.firstName} lesson={oneTstLessonName} mrk={t.mark}></MarkToUpdate>
                     {/* <tr>
@@ -101,7 +101,7 @@ const ViewTests = (props) => {
                     <td className="td2"> {t?.mark}</td>
                 </tr> */}
                 </>
-            ))}
+            )):'לא נמצאו תלמידים'}
             </tbody>
         </table>
         </div>}

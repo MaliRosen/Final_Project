@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const Student = require("../models/student");
+const Teacher = require("../models/teacher");
 const Lessons = require("../models/lessons");
 const { ObjectId } = require('mongodb');
 
@@ -57,11 +58,8 @@ class LessonsControllers {
 
   postLesson = async (req, res) => {
   try{
-    const { teacher, lessonName, file, date, notes, time, subject, video } =  req.body; //Adress, phone ....
-    //Validations.
-    //Check if user exists
-    var arrHw = [];
-
+    const { teacher, lessonName, file, date, notes, time, subject, video } =  req.body; 
+    
     const numLesson =(await Lessons.find({subject:subject})?.length || 0)+1
     console.log('numLesson ',numLesson);
     var myobj = new Lessons({
@@ -73,7 +71,6 @@ class LessonsControllers {
       notes,
       time,
       subject,
-      arrHw,
       video
     });
     await myobj.save();
@@ -196,6 +193,28 @@ class LessonsControllers {
       res.status(500).json({error:error})
     }
 
+  }
+
+  deleteLesson = async (req, res) => {
+    try{
+      const { lessonId } = req.params;
+      const lesson = await Lessons.findByIdAndDelete(lessonId);
+      console.log('lesson' , lesson.subject);
+      res.send('ok');
+    }catch (err) {
+      console.log('error on delete lesson');
+      return res.status(400).json({error:err});
+    }
+  }
+  getLesson = async (req, res) => {
+    try{
+      const { lessonId } = req.params;
+      const lesson = await Lessons.findById(lessonId);
+      res.json({lesson:lesson}); 
+    } catch (err) {
+      console.log('error on delete lesson');
+      return res.status(400).json({error:err});
+    }
   }
 }
 

@@ -9,8 +9,8 @@ const studentSchema = new Schema({
     firstName: { type: String, required: true },
     lastName: String,
     // email: { type: String, validate: [isEmail, 'invalid email'] },
-    email: { type: String },
-    password: { type: String, required: true, minlength: 1 },
+    email: { type: String, unique: true },
+    password: { type: String, required: true, minlength: 8 },
 })
 
 module.exports = mongoose.model('student', studentSchema)

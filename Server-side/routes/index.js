@@ -6,6 +6,6 @@ const MailController = require("../controllers/mail")
 
 
 
-router.post("/mail", MailController.mailSender);
+router.post("/mail", MailController.sendMail);
 
 module.exports = router;

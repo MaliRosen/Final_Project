@@ -28,7 +28,7 @@ const ViewTests = (props) => {
       studentId,
       file: fileData,
     });
-    dispatch({ type: "set-loader", payload: true });
+    dispatch({ type: "set-loader", payload: false });
     console.log("postMyTestFileToServer", res);
   };
 
@@ -51,7 +51,7 @@ const ViewTests = (props) => {
   }, [props.subject]);
 
   return (
-    <div className="table">
+    <div className="table-wrapper">
       {tests.length > 0 ? (
         <>
           <div className="table">
@@ -99,7 +99,7 @@ const ViewTests = (props) => {
             <div className="pageTitle">בחודש הקרוב: </div>
             <table>
               <tbody>
-                {tests?.slice(1).map((t) => (
+                {tests?.slice(1).length>0? tests?.slice(1).map((t) => (
                   <tr>
                     <td className="td1"> {t?.nameSubject}</td>
                     <td className="td3"> {t?.date.slice(0, 10)}</td>
@@ -124,7 +124,7 @@ const ViewTests = (props) => {
                       שלח
                     </button>
                   </tr>
-                ))}
+                )):'לא נמצאו מבחנים'}
               </tbody>
             </table>
           </div>

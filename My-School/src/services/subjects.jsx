@@ -1,6 +1,6 @@
 
 export const getAllSubjectsFromServer = () => {
-    return fetch(`http://localhost:3000/teacher/allTeachers`)
+    return fetch(`http://localhost:3000/teacher/allLessons`)
     .then((res) => res.json())
     .then((data) =>{ 
       return data;

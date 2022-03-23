@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from "react-router-dom";
+import { useHistory, Link} from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
 import MainMenu from '../teacherMainMenu';
 import Avatar from '@material-ui/core/Avatar';
 import { previousLessonToServer } from '../../services/previousLessons';
 import '../../style/student/s_previousLessons.css';
-
+import { useMySchoolService } from '../../services/mySchoolService'
 
 const PreviousLessons = (props) => {
-  // 
+  const MySchoolService =useMySchoolService()
   let history = useHistory();
   const [lesss, setless] = useState([]);
   const dispatch =useDispatch();
-  // const res = history.location.state ? history.location.state.res : [];
+
   useEffect(() =>{
     if(props.subject){
       dispatch({ type: "set-loader", payload:true});
@@ -39,10 +39,10 @@ const PreviousLessons = (props) => {
 
     history.push({ pathname: "/newHw", state: { id: id } });
   }
+  const deleteLesson =(id) => {
+    MySchoolService.delete('lesson/lesson',id)
+  }
 
-  // useEffect(() => setless(res), []);
-  //   useEffect(() => setless(res22),[])
-  console.log("less", { lesss })
 
   return (
     <div>
@@ -71,7 +71,9 @@ const PreviousLessons = (props) => {
               <td className="td4"> {herLess?.notes}</td>
               <td className="td2"> {herLess?.time}</td>
               {/* {  <button onClick={()=>goToHw(herLess._id)}>שעורי בית להכניס  </button>} */}
-              {<button className="sendBtn" onClick={() => goToHw(herLess.numLesson)}>ש.ב להכניס  </button>}
+              <td><button className="sendBtn" onClick={() => goToHw(herLess.numLesson)}>ש.ב להכניס  </button></td>
+              <td><button onClick={()=>deleteLesson(herLess._id)}>מחק שיעור</button></td>
+              <td><Link to={"/zoom/"+herLess._id}>צפיה בשיעור</Link></td>
             </tr>
           ))}
           </tbody>

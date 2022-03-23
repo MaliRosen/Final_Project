@@ -17,7 +17,7 @@ function Subscribe() {
   const [lessons, setLessons] = useState([]);
 
   const getAllSubjects = async () => {
-    MySchoolService.get("teacher/allTeachers")
+    MySchoolService.get("teacher/allLessons")
       .then((data) => {
         setLessons(data);
       })
@@ -37,6 +37,7 @@ function Subscribe() {
 
   return (
     <div className="">
+      <h3>שים לב, רישום לשיעור יוציא אותך מהשיעור בו אתה רשום כעת</h3>
       <div className="btn-s">
         <div>
           <button

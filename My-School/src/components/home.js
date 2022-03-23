@@ -4,7 +4,8 @@ function Home() {
 
   return (
     <div className="">
-      <h1>HOME</h1>
+      <h1>ברוכים הבאים </h1>
+       <h1> לאיזור האישי בבית ספרנו</h1>
     </div>
   );
 };

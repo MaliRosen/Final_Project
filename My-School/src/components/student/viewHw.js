@@ -20,7 +20,9 @@ const ViewHw = (props) => {
     let res = '';
     
     let type = "Lessons"
+    dispatch({ type: "set-loader", payload:true});
     res = await postHwAnswerToServer({lessonId, studentId, file:fileData});
+    dispatch({ type: "set-loader", payload:false});
     console.log("postMyHwFileToServer", res);
   }
 
@@ -66,9 +68,9 @@ const ViewHw = (props) => {
                   </tr>)}
               </td>
               <td>{hw?.mark?'שיעורי הבית כבר הוגשו ונבדקו':<input type="file" onChange={onfileChange} placeholder="⬆" ></input> }</td>
-              <td>{hw?.mark?'לא ניתן לעדכן שיעורי בית בדוקים ':hw?.file && <>'שיעורי הבית כבר הוגשו האם ברצונך לעדכן?'
-              <button className="sendBtn" onClick={() =>postMyHwFile(l._id, props.id, file)}> שלח</button></>
-          }</td>
+              <td>{
+              hw?.mark?'לא ניתן לעדכן שיעורי בית בדוקים '
+                : <>{hw?.file &&'שיעורי הבית כבר הוגשו האם ברצונך לעדכן?'}<button className="sendBtn" onClick={() =>postMyHwFile(l._id, props.id, file)}> שלח</button></>}</td>
             </tr>
           )})}
           </tbody>

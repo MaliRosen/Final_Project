@@ -52,15 +52,20 @@
     margin-top:7%;
     /* padding:0%; */
     /* align-content: space-around; */
-    align-items: center;
     justify-content: center;
     /* border-radius: 30%; */
     border-top-left-radius: 25%;
     border-top-right-radius: 25%;
     border-end-end-radius: 25%;
     border-bottom-left-radius: 25%;
-}
+    align-items: flex-end;
+    flex-direction: column;
 
+}
+    .error-message{
+        color: red;
+        font-size: small;
+    }
 input{
     /* border-radius: 30%; */
     border: none;

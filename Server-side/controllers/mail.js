@@ -1,56 +1,33 @@
-var nodemailer = require('nodemailer');
+var nodemailer = require("nodemailer");
+const https = require("https");
+var sendmail = require("./sendmail")({ silent: true });
+
 class Mail {
-    mailSender = async (req, res) => {
-        console.log("--------------------");
-
-        console.log(req.body.email);
-
-        const { contact } = req.body
-        //אתחול המשתנים של שליחת המייל
-        var transporter = nodemailer.createTransport({
-         
-            service: 'gmail',
-            auth: {
-                user: 'myschool863@gmail.com‏',
-                pass: 'tkhacgnkh',
-            }
-        });
+  mailSender = async (req, res) => {
+      const {email, name} = req.body
+    sendMail(email, name).then(reply=>res.json({res:reply}))
+      .catch(error=>res.status(500).json({error:error}))
+  };
 
 
-        // var transporter = nodemailer.createTransport(({
-        //     host: "myschool863@gmail.com‏", // hostname
-        //     secure: false, // use SSL
-        //     port: 25, // port for secure SMTP
-        //     auth: {
-        //         user: 'myschool863@gmail.com‏',
-        //         pass: 'tkhacgnkh',
-        //     },
-        //     tls: {
-        //         rejectUnauthorized: false
-        //     }
-        // }));
-        var mailOptions = {
-            // from: 'leadersdashboard@gmail.com',
-            // to: contact.email,
-            to: req.body.email,
-            subject: 'Sending Email using Node.js',
-            html: 'ברוכים הבאים לבית ספרנו',
-
-            text: 'That was easy!'
-            ,
-            // text:contact
-        };
-        //הפעלת הפונקציה
-        transporter.sendMail(mailOptions, function (error, info) {
-            if (error) {
-                console.error('error on mailSender ', error)
-                res.status(500).json({error})
-            } else {
-                res.json({res:info.response});
-            }
-        })
+  sendMail = async (email, name) => {
+    const options =  {
+        from: "schreiberp21@gmail.com",
+        to: email,
+        subject: " היי"+ name,
+        html: "ברוכים הבאים לבית ספרנו",
     }
-
+   return new Promise(function (resolve, reject) {
+      sendmail(options, (err, reply) => {
+        console.log('err: ',err, 'reply: ',reply);
+          if(err){
+            reject(err);
+          }
+        resolve(reply);
+      }
+    );
+   }) 
+  };
 }
 
 module.exports = new Mail();

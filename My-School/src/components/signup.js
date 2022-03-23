@@ -1,84 +1,61 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useHistory } from "react-router-dom";
-import { connect, useDispatch } from "react-redux";
+import { connect, useDispatch, } from "react-redux";
 import { saveUser } from "../redux/action";
 import { signupToServer } from "../services/signup";
 import { getAllSubjectsFromServer } from "../services/subjects";
 import { mailToServer } from "../services/mail";
 import "../style/signup.css";
+import { useValidator, generateId } from './share/validator'
 
 const Signup = () => {
   let history = useHistory();
   const dispatch = useDispatch();
-
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [id, setId] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [subject, setSubject] = useState("");
-  const [lessons, setLessons] = useState();
-  const [hasError, setHasError] = useState(false);
-
-  const [flagFirstName, setFlagFirstName] = useState(false);
-  const [flagId, setFlagId] = useState(false);
-  const [flagEmail, setFlagEmail] = useState(false);
-  const [flagPassword, setFlagPassword] = useState(false);
-  const [flagSubject, setFlagSubject] = useState(false);
-
-  const [PasswordMass, setPasswordMass] = useState(false);
-  const [IdMass, setIdMass] = useState(false);
-  const [emailMass, setEmailMass] = useState(false);
+  
+  const [firstName, setFirstName, firstNameError] = useValidator("",'string',{required:true});
+  const [lastName, setLastName, lastNameError] = useValidator("",'string',{required:true});
+  const [id, setId, idError] = useValidator("", 'id',{required:true});
+  const [email, setEmail, emailError] = useValidator("",'email',{required:true});
+  const [password, setPassword, passwordError] = useValidator("",'password',{required:true});
+  const [subject, setSubject, subjectError] = useValidator("",'string',{required:true});
+  const [lessons, setLessons] = useState("");
 
   let res = "";
+const validateData =() => {
+  if(!subject){setSubject('')}
+  return !firstNameError && !lastNameError && !idError && !emailError && !passwordError && subject
+}
 
-  useEffect(() => {
-    if (
-      firstName && id && email && password && subject //todo: validationS
-    )
-      setHasError(false);
-    else setHasError(true);
-  }, [firstName, id, email, password, subject]);
+const test =async () => {
+  setFirstName((Math.random() + 1).toString(36).substring(7));
+  setLastName((Math.random() + 1).toString(36).substring(7));
+  setId(generateId())
+  setEmail((Math.random() + 1).toString(36).substring(7)+'@abc.com');
+  setPassword('12345678');
+  if(lessons){
+    setSubject(lessons[0]);
+  } else {
+    res = await getAllSubjectsFromServer();
+    setSubject(res[0] || ' ');
+  }
+
+}
 
   const signup = async () => {
-    if (hasError) {
-     
-    } else {
-      try {
-        const res = await signupToServer(
-          subject,
-          firstName,
-          lastName,
-          id,
-          email,
-          password
-        );
-        dispatch({
-            type: "save_user",
-            payload: {
-              subject,
-              firstName,
-              lastName,
-              id,
-              email,
-              password,
-            },
-          });
-          localStorage.setItem(
-          "token",
-          JSON.stringify({
-            type: "student",
-            email: res.result?.email,
-            _id: res.result?._id,
-            token: res?.token,
-          })
-        );
-        await sendMail(email, firstName);
-        alert("ברישום בוצע בהצלחה!! ברוכים הבאים לבית סיפרנו!!!!😊😊");
-        history.push("/");
-      } catch (error) {
-        alert("הרישום נכשל😒");
-      }
+    const newUser={  subject, firstName, lastName, id, email, password }
+    if(validateData()){
+        signupToServer(newUser).then(res=>{
+          dispatch({type: "save_user", payload: newUser});
+          localStorage.setItem("token", JSON.stringify({ type: "student", email: res.resultEmail,  _id: res.result?._id,token: res?.token}));
+          alert("ברישום בוצע בהצלחה!! ברוכים הבאים לבית סיפרנו!!!!😊😊");
+          history.push("/");
+        }).catch (error=> {
+          if(error.message){
+            alert(error.message);
+          } else {
+          alert("הרישום נכשל😒");
+          }
+        })
     }
   };
 
@@ -93,33 +70,8 @@ const Signup = () => {
       alert(" נכשל😒");
     }
   };
-  const sendMail = async (email, firstName) => {
-    try {
-      const res = await mailToServer(email, firstName);
-      console.log(res);
-      alert("נשלח לך מייל ");
-    } catch (error) {
-      alert("הרישום נכשל😒");
-    }
-  };
-  const isNotEmail = () => {
-    let regEmail =
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return false; // (!regEmail.test(email))
-  };
-  const onlyNumbers = () => {
-    let regNumber = /^[0-9]$/;
-    return !regNumber.test(id);
-  };
-  // function is_israeli_id_number(id) {
-  //     id = String(id).trim();
-  //     if (id.length > 9 || isNaN(id)) return false;
-  //     id = id.length < 9 ? ("00000000" + id).slice(-9) : id;
-  //     return Array.from(id, Number).reduce((counter, digit, i) => {
-  //         const step = digit * ((i % 2) + 1);
-  //         return counter + (step > 9 ? step - 9 : step);
-  //     }) % 10 === 0;
-  // }
+
+
   
   return (
     <div className="">
@@ -133,53 +85,37 @@ const Signup = () => {
             name="firstName"
             placeholder=":הכנס שם פרטי"
             value={firstName}
-            onChange={(e) => {
-              console.log(e.target.value);
-              setFirstName(e.target.value);
-              setFlagFirstName(false);
-            }}
+            onBlur={(e) => setFirstName(e.target.value)}
+            onChange={(e) => setFirstName(e.target.value)}
           />
-          <div>{flagFirstName ? "שדה חובה!" : ""}</div>
+          <div className="error-message">{firstNameError}</div>
         </div>
 
         {/* lastname */}
         <div className="input_sign">
           <input
-            type="text"
-            id="lastname"
             name="lastname"
             placeholder=":הכנס שם משפחה"
             value={lastName}
-            onChange={(e) => {
-              console.log(e.target.value);
-              setLastName(e.target.value);
-            }}
+            onChange={(e) => setLastName(e.target.value)}
+            onBlur={(e) =>setLastName(e.target.value)}
           />
+          <div className="error-message">{lastNameError}</div>
         </div>
 
         {/* id */}
         <div className="input_sign">
           <input
-            type="text"
+            type="number"
             id="id"
             name="id"
             placeholder=":הכנס תז"
             value={id}
-            onChange={(e) => {
-              console.log(e.target.value);
-              setId(e.target.value);
-              setFlagId(false);
-            }}
-            onBlur={() => {
-              if (onlyNumbers()) {
-                setIdMass(true);
-                // setFlagId(true);
-              }
-            }}
+            onChange={(e) => setId(e.target.value)}
+            onBlur={(e) => setId(e.target.value)}
           />
-          <div>
-            {flagId && IdMass ? "!לא תקין " : flagId ? "שדה חובה!" : ""}
-          </div>
+          
+          <div className="error-message">{idError}</div>
         </div>
 
         {/* email */}
@@ -190,27 +126,10 @@ const Signup = () => {
             name="email"
             placeholder=": הכנס דואר אלקטרוני"
             value={email}
-            onChange={(e) => {
-              console.log(e.target.value);
-              setEmail(e.target.value);
-              setFlagEmail(false);
-            }}
-            onBlur={() => {
-              if (isNotEmail()) {
-                setEmailMass(true);
-                setFlagEmail(true);
-              } else {
-                setEmailMass(false);
-              }
-            }}
+            onChange={(e) => setEmail(e.target.value)}
+            onBlur={(e) => setEmail(e.target.value)}
           />
-          <div>
-            {flagEmail && emailMass
-              ? "!מייל לא תקין "
-              : flagEmail
-              ? "שדה חובה!"
-              : ""}
-          </div>
+          <div className="error-message">{emailError}</div>
         </div>
 
         {/* password */}
@@ -221,35 +140,15 @@ const Signup = () => {
             name="password"
             placeholder=":הכנס סיסמא"
             value={password}
-            onChange={(e) => {
-              console.log(e.target.value);
-              setPassword(e.target.value);
-              setFlagPassword(false);
-            }}
-            onBlur={() => {
-              if (password.length < 8) {
-                setPasswordMass(true);
-                setFlagPassword(true);
-              }
-            }}
+            onChange={(e) => setPassword(e.target.value)}
+            onBlur={(e) =>  setPassword(e.target.value)}
           />
-          <div>
-            {flagPassword && PasswordMass
-              ? "! לפחות 8 תווים"
-              : flagPassword
-              ? "שדה חובה!"
-              : ""}
-          </div>
+          <div className="error-message">{passwordError}</div>
         </div>
 
         <div className="btn-s">
           <div>
-            <button
-              className="button btn-shwo"
-              onClick={() => {
-                getAllSubjects();
-              }}
-            >
+            <button className="button btn-shwo" onClick={getAllSubjects} >
               👉 לחץ כדי לבחור מקצוע
             </button>
             {lessons && (
@@ -261,26 +160,19 @@ const Signup = () => {
                       setSubject(lesson.subject);
                     }}
                   >
-                    {lesson.subject}{" "}
+                    {lesson.subject}
                   </button>
                 ))}
                 {lessons.length == 0 &&
                   "אין שיעורים לבחירה, אנא פנה למנהל המערכת"}
               </div>
             )}
+          <div className="error-message">{subjectError}</div>
           </div>
 
           <div>
-            <button
-              className="button btn-sign"
-              onClick={() => {
-                signup();
-               
-              }}
-            >
-              {" "}
-              רישום{" "}
-            </button>
+            <button className="button btn-sign" onClick={signup} >רישום </button>
+            <button className="button btn-sign" onClick={test} >test </button>
           </div>
         </div>
       </div>

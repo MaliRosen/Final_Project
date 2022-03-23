@@ -13,7 +13,7 @@ const ForgotPassword = () => {
   const update = async () => {
     const res = await forgetPassword(email, password);
     console.log("reset password response: ", res);
-    history.replace("/");
+    history.replace("/login");
   };
 
   return (

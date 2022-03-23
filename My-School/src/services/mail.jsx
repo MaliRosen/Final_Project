@@ -1,4 +1,4 @@
-export const mailToServer = (email,firstName) => {
+export const mailToServer = (email,name) => {
     fetch('http://localhost:3000/mail', {
         method: 'POST',
         headers: {
@@ -6,10 +6,8 @@ export const mailToServer = (email,firstName) => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-
             email,
-            firstName
-
+            name
         })
     });
 }
