@@ -1,5 +1,5 @@
 export const mailToServer = (email,name) => {
-    fetch('http://localhost:3000/mail', {
+    fetch('http://localhost:3001/mail', {
         method: 'POST',
         headers: {
             Accept: 'application/json',

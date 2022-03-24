@@ -1,6 +1,6 @@
 export const signupToServer = (newUser) => {
   return new Promise((resolve, reject) => {
-    fetch('http://localhost:3000/users/signup', {
+    fetch('http://localhost:3001/users/signup', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

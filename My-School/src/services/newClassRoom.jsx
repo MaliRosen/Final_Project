@@ -1,5 +1,5 @@
 // export const newLessonToServer=(numLesson, lessonName,file,date,notes,time) => {
-//     fetch(`http://localhost:3000/postLesson?numLesson=${numLesson}?lessonName=${lessonName}?file=${file}?date=${date}?notes=${notes}?time=${time}`)
+//     fetch(`http://localhost:3001/postLesson?numLesson=${numLesson}?lessonName=${lessonName}?file=${file}?date=${date}?notes=${notes}?time=${time}`)
 //     .then((res) => res.json())
 //     .then((data) =>{ console.log(data);
 //            return data;}
@@ -10,7 +10,7 @@
 // }
 
 export const newLessonToServer=(data) => {
-fetch('http://localhost:3000/lesson/postLesson/', {
+fetch('http://localhost:3001/lesson/postLesson/', {
   method: 'POST',
   headers: {
     Accept: 'application/json',

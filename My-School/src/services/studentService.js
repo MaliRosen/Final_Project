@@ -13,7 +13,7 @@ const hideLoader= () => {
 }
 const post=(url, body, action)=>{
   showLoader();
-  return new Promise((resolve, reject)=>{ fetch(`http://localhost:3000/${url}/${student._id}`, {
+  return new Promise((resolve, reject)=>{ fetch(`http://localhost:3001/${url}/${student._id}`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -32,7 +32,7 @@ const post=(url, body, action)=>{
   
 const get=(url, body, action)=>{
   showLoader();
-return  fetch(`http://localhost:3000/${url}/${student._id}`, {
+return  fetch(`http://localhost:3001/${url}/${student._id}`, {
     method: 'GET',
     headers: {
       Accept: 'application/json',

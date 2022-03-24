@@ -12,7 +12,7 @@ export const useMySchoolService = () => {
   const post = (url, params, body, action) => {
     return new Promise((resolve, reject) => {
       showLoader();
-      fetch(`http://localhost:3000/${url}/${params}`, {
+      fetch(`http://localhost:3001/${url}/${params}`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -36,7 +36,7 @@ export const useMySchoolService = () => {
   const _delete = (url, params) => {
     return new Promise((resolve, reject) => {
       showLoader();
-      fetch(`http://localhost:3000/${url}/${params}`, {
+      fetch(`http://localhost:3001/${url}/${params}`, {
         method: "DELETE",
         headers: {
           Accept: "application/json",
@@ -58,7 +58,7 @@ export const useMySchoolService = () => {
   const get = (url, params, action) => {
     return new Promise((resolve, reject) => {
       showLoader();
-      return fetch(`http://localhost:3000/${url}/${params || ''}`, {
+      return fetch(`http://localhost:3001/${url}/${params || ''}`, {
         method: "GET",
         headers: {
           Accept: "application/json",

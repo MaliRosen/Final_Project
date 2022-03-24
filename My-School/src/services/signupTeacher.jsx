@@ -1,6 +1,6 @@
 export const signupTeacherToServer = (newTeacher) => {
   return new Promise((resolve, reject) => {
-    fetch('http://localhost:3000/teacher/signup', {
+    fetch('http://localhost:3001/teacher/signup', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
