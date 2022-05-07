@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { postMarkToServer } from '../../services/postMark';
 import { connect, useDispatch } from "react-redux";
 // const { ObjectId } = require('mongodb');
@@ -6,20 +6,21 @@ import { connect, useDispatch } from "react-redux";
 
 const MarkToUpdate = (props) => {
 
-    const [mark, setMark] = useState(props.mark || '');
-    const { type,  student, lesson, id, studentName}=props;
+    const [mark, setMark] = useState('');
+    const { type,  studentId, lessonId, id, studentName}=props;
 
     const postMark = async () => {
-        let data = await postMarkToServer(type,student, mark, lesson,);
+        let data = await postMarkToServer(type,studentId, mark, lessonId);
         console.log("data", data);
     }
     let a = props.mrk;
 
+    useEffect(() => {setMark(props.mark)},[props.mark])
 return (<tr>
                 {/* <td className="td1"> student:  {props.student.firstName}</td> */}
                 <td className="td1">  {studentName}</td>
                 <td>   <input type="number" min="60" max="100"
-                    value={mark}
+                    defaultValue={mark}
                     onChange={(e) => {
                         console.log(e.target.value)
                         setMark(e.target.value)

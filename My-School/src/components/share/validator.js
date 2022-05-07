@@ -14,7 +14,7 @@ export const useValidator = (defaultValue, type, options = {}) => {
       setErrorMessage("");
     }
     if (typeof VALIDATION_OPTIONS[type] === "function") {
-      if (!VALIDATION_OPTIONS[type](newValue)) {
+      if (!VALIDATION_OPTIONS[type](newValue.trim())) {
         setErrorMessage(VALIDATION_MESSAGES[type] || "שדה זה מכיל ערך שגוי");
       } else {
         setErrorMessage("");
