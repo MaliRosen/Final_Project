@@ -43,3 +43,11 @@ video{
 width: 100%;
 height: auto;
 }
+
+.avatar-container{
+  width: 200px;
+  position: absolute;
+  z-index: 1;
+  top: 7px;
+  left:7px
+}

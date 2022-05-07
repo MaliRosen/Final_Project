@@ -27,7 +27,7 @@ const Header = () => {
   };
 
   return (
-    <div>
+    <div className="avatar-container">
       <Avatar onClick={handleClick}>
         {user?.firstName && user?.firstName[0]}
       </Avatar>

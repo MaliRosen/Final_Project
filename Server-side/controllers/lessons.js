@@ -20,7 +20,6 @@ class LessonsControllers {
   };
 
   allHw = async (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3001");
     const { subject } = req.query;
     try {
       // let resultHw = await Lessons.find({subject:subject})
@@ -35,7 +34,6 @@ class LessonsControllers {
   };
 
   allLessons = async (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3001");
     const subject = req.query;
     try {
       let result = await Lessons.find(subject);

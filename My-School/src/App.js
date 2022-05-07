@@ -138,7 +138,10 @@ function App() {
       <Route path="/s_marks">
         <ViewMarks />
       </Route>
-      <Route path="/zoom/:lessonId">
+      <Route exact path="/zoom/:lessonId">
+        <Zoom />
+      </Route>
+      <Route exact path="/zoom/">
         <Zoom />
       </Route>
       <Route path="/subscribe">

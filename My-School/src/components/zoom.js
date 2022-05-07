@@ -33,13 +33,9 @@ const Zoom = () => {
     <div className="table">
       {lesson ? (
         <div style={{ width: "75%" }}>
-          <video width="320" height="240" controls>
+          <video style={{'max-height': '80vh'}} width="320" height="240" controls>
             {lesson.video && <source src={lesson.video} type="video/mp4" />}
             </video>
-            <video width="320" height="240" controls>
-            {<source src='https://www.kore.co.il/files/2022/3/videos622d28e382b50file_1238.mp4' type="video/mp4" />}
-            Your browser does not support the video tag.
-          </video>
         </div>
       ) : "לא נמצא שיעור פעיל"}
     </div>

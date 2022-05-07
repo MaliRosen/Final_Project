@@ -4,7 +4,6 @@ const Teacher = require("../models/teacher");
 
 class TeacherControllers {
   previousLessons = async (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3001");
     //  const { id } = req.query;
     // const subject = req.query;
     try {
