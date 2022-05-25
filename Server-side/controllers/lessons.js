@@ -94,7 +94,7 @@ class LessonsControllers {
       .then(response=> res.json({message:'OK',res:response}))
       .catch(err=>res.status(500).json({err:err}))
     } catch(error){
-      res.status(500).json({err:err});
+      res.status(500).json({err:error});
     }
   }
 

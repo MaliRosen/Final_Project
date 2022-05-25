@@ -54,7 +54,7 @@ app.use(function(err, req, res, next) {
 
 const url = 'mongodb://localhost:27017/mySchoolDB'
 const mongoUrl='mongodb+srv://myDBPassword:myDBPassword@cluster0.49ipj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
-mongoose.connect(mongoUrl)
+mongoose.connect(mongoUrl,{})
 .then(()=>console.log('DB connected'))
 .catch(err=>console.log('error while connecting to Mongoose ',err))
 
