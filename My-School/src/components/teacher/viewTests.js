@@ -68,6 +68,7 @@ const ViewTests = (props) => {
                 <tr className="title">
                     <td className="td1">נושא</td>
                     <td className="td2">תאריך </td>
+                    <td className="td2">קובץ מבחן </td>
                 </tr>
             </thead>
             <tbody>
@@ -75,6 +76,7 @@ const ViewTests = (props) => {
                 <tr>
                     <td className="td1"> {test?.nameSubject}</td>
                     <td className="td2"> {test?.date.slice(0,10)}</td>
+                    <td className="td2"><a href={test.file} download={'test_'+test.nameSubject}>לחץ להורדה</a></td>
                     <button className="sendBtn" onClick={() => tst(test.marks, test?._id)}>הנבחנים</button>
                 </tr>
             ))}

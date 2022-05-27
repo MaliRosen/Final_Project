@@ -71,7 +71,10 @@ const PreviousLessons = (props) => {
               <td className="td4"> {herLess?.notes}</td>
               <td className="td2"> {herLess?.time}</td>
               {/* {  <button onClick={()=>goToHw(herLess._id)}>שעורי בית להכניס  </button>} */}
-              <td><button className="sendBtn" onClick={() => goToHw(herLess.numLesson)}>ש.ב להכניס  </button></td>
+              <td>
+                {herLess.file && <a href={herLess.file} download={"hw_"+herLess.lessonName}>לחץ להורדת ש.ב</a>}
+                <button className="sendBtn" onClick={() => goToHw(herLess.numLesson)}>ש.ב להכניס  </button>
+                </td>
               <td><button onClick={()=>deleteLesson(herLess._id)}>מחק שיעור</button></td>
               <td><Link to={"/zoom/"+herLess._id}>צפיה בשיעור</Link></td>
             </tr>
