@@ -65,13 +65,16 @@ class Login {
   };
 
   signup = async (req, res) => {
-
     const { subject, firstName, lastName, id, email, password } = req.body;
+    const user = await Student.findOne({ email })
+    if(user){
+      return res.status(500).json({status:500, message:'כתובת מייל כבר רשומה במערכת', user: user});
+    }
       MailController.sendMail(email, firstName)
         .then(async () => {
           const myobj = new Student(req.body);
           await myobj.save();
-          console.log("1 document inserted");
+          console.log("1 document inserted", email);
 
           const token = this.generateAccessToken(myobj.email);
           return res.json({ result: myobj, token: token });
