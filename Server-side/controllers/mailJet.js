@@ -4,8 +4,8 @@ const request =(email, name)=> mailjet.post("send", {'version': 'v3.1'}).request
   "Messages":[
     {
       "From": {
-        "Email": "pm3199086@gmail.com",
-        "Name": "pnina"
+        "Email": "myschool150922@gmail.com",
+        "Name": "my-school"
       },
       "To": [
         {
@@ -22,11 +22,14 @@ const request =(email, name)=> mailjet.post("send", {'version': 'v3.1'}).request
 })
 const sendMail=(email, name)=>{
     return new Promise((resolve, reject)=>{
+      console.log('sending email...');
         request(email, name)
   .then((result) => {
+    console.log('sending email to ',name,': ',email,' succeed');
     resolve(result.body)
   })
   .catch((err) => {
+    console.log('sending email to ',name,': ',email,' failed');
     reject(err.statusCode)
   })
     })

@@ -52,8 +52,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-const url = 'mongodb://localhost:27017/mySchoolDB'
-const mongoUrl='mongodb+srv://myDBPassword:myDBPassword@cluster0.49ipj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+// const url = 'mongodb://localhost:27017/mySchoolDB'
+const mongoUrl='mongodb+srv://mySchool:mySchool150922@my-school.moluiv1.mongodb.net/?retryWrites=true&w=majority'
 mongoose.connect(mongoUrl,{})
 .then(()=>console.log('DB connected'))
 .catch(err=>console.log('error while connecting to Mongoose ',err))
