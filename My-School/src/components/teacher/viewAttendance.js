@@ -4,6 +4,7 @@ import MainMenu from '../teacherMainMenu';
 import Avatar from '@material-ui/core/Avatar';
 import { connect, useDispatch } from "react-redux";
 import { getAllAttendanceFromServer } from '../../services/getAllAttendance';
+import '../../style/teacher/ViewAttendance.css'
 
 
 const ViewAttendance = (props) => {
@@ -29,7 +30,7 @@ const ViewAttendance = (props) => {
 
     return (<div className="table">
         <div className="pageTitle">גליון נוכחות עבור שיעור: {data.lessons && data.lessons[0]?.subject}  </div>
-        {data.lessons?.length>0? <table className="table">
+        {data.lessons?.length>0? <table className="table tablelesson">
             <thead >
                 <tr className="title">
                     <th></th>
