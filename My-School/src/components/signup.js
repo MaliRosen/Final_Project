@@ -154,7 +154,7 @@ const test =async () => {
             {lessons && (
               <div>
                 {lessons.map((lesson, i) => (
-                  <button className="lesson-button"
+                  <button
                     key={i}
                     onClick={() => {
                       setSubject(lesson.subject);

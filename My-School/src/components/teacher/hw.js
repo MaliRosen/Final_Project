@@ -86,7 +86,7 @@ const Hw = (props) => {
                     {oneHw?.map(t => (
                         <tr>
                             <td > <a href={t.file} download="hw">⬇</a></td>
-                            <MarkToUpdate type="lesson" studentId={t?.studentId?._id} studentName={t?.studentId.firstName} lessonId={oneHwLessonName} mark={t.mark}></MarkToUpdate>
+                            <MarkToUpdate type="lesson" studentId={t?.studentId?._id} studentName={t?.studentId?.firstName} lessonId={oneHwLessonName} mark={t.mark}></MarkToUpdate>
                             {/* <tr>
                     <td className="td1"> {t?.studentId}</td>
                     <td className="td2"> {t?.mark}</td>

@@ -3,6 +3,7 @@
     text-align: center;
     font-weight: bold;
     padding-bottom: 20px;
+    color: cadetblue !important;
 }
 
 .table{
@@ -22,6 +23,8 @@
     height: auto;
     border-radius:10px;
     direction: rtl;
+    text-align: center;
+
 
 }
 
@@ -60,6 +63,14 @@
     border-radius:10px;
     direction: rtl;
 
+}
+
+.home{
+    margin-top: 250px !important;
+}
+
+.hrHome{
+    color: cadetblue !important;
 }
 
 .wrapper{
@@ -103,10 +114,10 @@ td {
 
 
 .newTest{
-    margin-left: 20px;
+    margin-left: 35%;
     margin-right: -20px;
     width: 180px;
-    height: 100px;
+    height: 70px;
     margin-top:0;
 }
 
@@ -153,8 +164,26 @@ tr {
 
 
 
+.btn {
+    position: initial !important;
+    left: 210px;
+    bottom: 100px;
+    right: 250px;
+    top: 380px;
+    bottom: 30px;
+    background: #43bda2;
+    border: 0.653653px solid #43bda2;
+    box-sizing: border-box;
+    box-shadow: 0px 5.92806px 11.1151px rgb(0 0 0 / 10%);
+    border-radius: 58.8287px;
+    width: 40px;
+}
 /*
 */
+
+.downloadH{
+    color: blue;
+}
 
 .td1 {
     /* width: 150px; */

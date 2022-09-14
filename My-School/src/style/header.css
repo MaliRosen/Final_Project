@@ -16,7 +16,7 @@
     top: 0;
     right: 0px;
     width: 20vw;
-    height: 100vh;
+    /* height: 100vh; */
     position: absolute;
     /* background-color: transparent; */
     /* direction: rtl; */
@@ -48,8 +48,8 @@
 
 .menu-logo{
     width: 25vh;
-    /* margin-right: -50%;
-    margin-top: 30%;
+     margin-right: 50px !important;
+    /*margin-top: 30%;
     border: none;
     background-color: transparent;
     color: #1c2c53;
@@ -100,7 +100,7 @@
     color: #1c2c53;
     /* width: 200%; */
     margin-top: 15%;
-    margin-left: 0%;
+    margin-right: 80px;
     /* height: 200%; */
     font-size: 1150%;
     /* font-family: inherit; */
@@ -108,6 +108,15 @@
     padding: 14px;
     /* margin-right: -50%; */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    align-items: center;
+
+}
+
+.iconMenu{
+    margin-top: 4px !important;
+   margin-left: 10px !important;
+   /* font-size: 100px !important; */
 }
 
 

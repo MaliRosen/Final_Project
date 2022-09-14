@@ -140,7 +140,3 @@ button{
     background: #EEF8FD;
 
 }
-
-.lesson-button:focus {
-    border: 1px black solid !important;
-}
