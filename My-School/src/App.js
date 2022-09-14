@@ -38,35 +38,35 @@ function App() {
   const history = useHistory();
   const user = useSelector((state) => state.user.user);
 
-  // useEffect(() => {
-  //   if(history.location.pathname.includes("signup") || history.location.pathname.includes("login")){
-  //     return;
-  //   }
-  //   if (!user?.type) {
-  //     const localData = JSON.parse(localStorage.getItem("token"));
-  //     if (localData?.type ==CONSTANTS.TYPE.ADMIN) {
-  //       dispatch({ type: "save_user", payload: { type: CONSTANTS.TYPE.ADMIN } });
-  //       return;
-  //     }
-  //     if (localData?.token) {
-  //       loginWithToken(localData._id, localData.token).then(res => {
-  //         if (res?.type) {
-  //           dispatch({ type: "save_user", payload: res });
-  //           if (!res?.subject) {
-  //             history.push("/subscribe");
-  //           }
-  //         } else {
-  //           dispatch({ type: "save_user", payload: null });
-  //           localStorage.clear();
-  //           history.push("/login");
-  //         }
-  //       });
-  //     } else {
-  //       dispatch({ type: "save_user", payload: null });
-  //       history.push("/login");
-  //     }
-  //   }
-  // }, [user, history]);
+  useEffect(() => {
+    if(history.location.pathname.includes("signup") || history.location.pathname.includes("login")){
+      return;
+    }
+    if (!user?.type) {
+      const localData = JSON.parse(localStorage.getItem("token"));
+      if (localData?.type ==CONSTANTS.TYPE.ADMIN) {
+        dispatch({ type: "save_user", payload: { type: CONSTANTS.TYPE.ADMIN } });
+        return;
+      }
+      if (localData?.token) {
+        loginWithToken(localData._id, localData.token).then(res => {
+          if (res?.type) {
+            dispatch({ type: "save_user", payload: res });
+            if (!res?.subject) {
+              history.push("/subscribe");
+            }
+          } else {
+            dispatch({ type: "save_user", payload: null });
+            localStorage.clear();
+            history.push("/login");
+          }
+        });
+      } else {
+        dispatch({ type: "save_user", payload: null });
+        history.push("/login");
+      }
+    }
+  }, [user, history]);
 
   return (
     <>
