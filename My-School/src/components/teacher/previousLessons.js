@@ -39,8 +39,21 @@ const PreviousLessons = (props) => {
 
     history.push({ pathname: "/newHw", state: { id: id } });
   }
-  const deleteLesson = (id) => {
+  const deleteLesson = (id) => {debugger
     MySchoolService.delete('lesson/lesson', id)
+    .then(res=>{
+       if (props.subject) {
+      dispatch({ type: "set-loader", payload: true });
+      
+      previousLessonToServer(props.subject)
+        .then(res => {
+          setless(res || []);
+          dispatch({ type: "set-loader", payload: false });
+        })
+        .catch(err => alert(err))
+    }
+    });
+   
   }
 
 

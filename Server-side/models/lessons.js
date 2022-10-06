@@ -21,7 +21,7 @@ const lessonsSchema = new Schema({
     ],
     arrAttendance:[
         {
-            studentId: { type: Schema.Types.ObjectId, ref: 'student', unique: true },
+            studentId: { type: Schema.Types.ObjectId, ref: 'student' },
             date: Date,
             isLate: Boolean
         }
