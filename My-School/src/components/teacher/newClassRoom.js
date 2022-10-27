@@ -73,7 +73,7 @@ const NewClassRoom = (props) => {
                         setDate(e.target.value)
                     }}
                 />
-                <input placeholder=" הכנס הערה" className="a f"
+                <input placeholder="הערות" className="a f"
                     value={notes} onChange={(e) => {
                         console.log(e.target.value)
                         setNotes(e.target.value)
@@ -114,7 +114,7 @@ const UploadVideo = ({setVideo}) => {
 
     return <>
         {/* <input type="file" onChange={onfileChange} className="a d"></input> */}
-        <input placeholder=" הכנס קישור לסרטון" className="a f"
+        <input placeholder="קישור לסרטון" className="a f"
                 onChange={(e) => {
                     console.log(e.target.value)
                     setVideo(e.target.value)

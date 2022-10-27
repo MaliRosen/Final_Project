@@ -83,7 +83,7 @@ const test =async () => {
             type="text"
             id="firstName"
             name="firstName"
-            placeholder=":הכנס שם פרטי"
+            placeholder=":שם פרטי"
             value={firstName}
             onBlur={(e) => setFirstName(e.target.value)}
             onChange={(e) => setFirstName(e.target.value)}
@@ -95,7 +95,7 @@ const test =async () => {
         <div className="input_sign">
           <input
             name="lastname"
-            placeholder=":הכנס שם משפחה"
+            placeholder=":שם משפחה"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             onBlur={(e) =>setLastName(e.target.value)}
@@ -109,7 +109,7 @@ const test =async () => {
             type="number"
             id="id"
             name="id"
-            placeholder=":הכנס תז"
+            placeholder=":תז"
             value={id}
             onChange={(e) => setId(e.target.value)}
             onBlur={(e) => setId(e.target.value)}
@@ -124,7 +124,7 @@ const test =async () => {
             type="text"
             id="email"
             name="email"
-            placeholder=": הכנס דואר אלקטרוני"
+            placeholder=":דואר אלקטרוני"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             onBlur={(e) => setEmail(e.target.value)}
@@ -138,7 +138,7 @@ const test =async () => {
             type="password"
             id="password"
             name="password"
-            placeholder=":הכנס סיסמא"
+            placeholder=":סיסמא"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             onBlur={(e) =>  setPassword(e.target.value)}
@@ -149,7 +149,7 @@ const test =async () => {
         <div className="btn-s">
           <div>
             <button className="button btn-shwo" onClick={getAllSubjects} >
-              👉 לחץ כדי לבחור מקצוע
+              👉 לחץ כדי לבחור קורס
             </button>
             {lessons && (
               <div>
@@ -172,7 +172,7 @@ const test =async () => {
 
           <div>
             <button className="button btn-sign" onClick={signup} >רישום </button>
-            <button className="button btn-sign" onClick={test} >test </button>
+            {/* <button className="button btn-sign" onClick={test} >test </button> */}
           </div>
         </div>
       </div>

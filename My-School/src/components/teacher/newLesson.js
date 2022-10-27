@@ -53,7 +53,7 @@ const NewLesson = (props) => {
                         setDate(e.target.value)
                     }}
                 />
-                <input placeholder=" הכנס הערה" className="a f"
+                <input placeholder="הערות" className="a f"
                     value={comment} onChange={(e) => {
                         console.log(e.target.value)
                         setComment(e.target.value)

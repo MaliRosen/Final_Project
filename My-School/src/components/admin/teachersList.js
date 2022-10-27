@@ -35,7 +35,7 @@ function TeacherList(props) {
               <td className="td2">  מספר זהות </td>
               <td className="td2">כתובת מייל</td>
               <td className="td4">  סיסמא </td>
-              <td className="td2">  מקצוע </td>
+              <td className="td2">  קורס </td>
               <td className="td2">מחק מורה</td>
             </tr>
           </thead>

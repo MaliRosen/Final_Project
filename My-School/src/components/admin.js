@@ -60,7 +60,7 @@ function Admin() {
           type="text"
           id="firstName"
           name="firstName"
-          placeholder=":הכנס שם פרטי"
+          placeholder=":שם פרטי"
           value={firstName}
           onBlur={(e) => setFirstName(e.target.value)}
           onChange={(e) => setFirstName(e.target.value)}
@@ -72,7 +72,7 @@ function Admin() {
       <div className="input_sign">
         <input
           name="lastname"
-          placeholder=":הכנס שם משפחה"
+          placeholder=":שם משפחה"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
           onBlur={(e) =>setLastName(e.target.value)}
@@ -86,7 +86,7 @@ function Admin() {
           type="number"
           id="id"
           name="id"
-          placeholder=":הכנס תז"
+          placeholder=":תז"
           value={id}
           onChange={(e) => setId(e.target.value)}
           onBlur={(e) => setId(e.target.value)}
@@ -101,7 +101,7 @@ function Admin() {
           type="text"
           id="email"
           name="email"
-          placeholder=": הכנס דואר אלקטרוני"
+          placeholder=":דואר אלקטרוני"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           onBlur={(e) => setEmail(e.target.value)}
@@ -115,7 +115,7 @@ function Admin() {
           type="password"
           id="password"
           name="password"
-          placeholder=":הכנס סיסמא"
+          placeholder=":סיסמא"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           onBlur={(e) =>  setPassword(e.target.value)}
@@ -127,7 +127,7 @@ function Admin() {
           <input
             type="text"
             name="subject"
-            placeholder=":הכנס מקצוע שהמורה מלמד"
+            placeholder=":קורס שהמורה מלמד"
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
             onBlur={(e) => setSubject(e.target.value)}
@@ -136,7 +136,7 @@ function Admin() {
       </div>
       <div >
           <button className="button btn-sign-teacher" onClick={signupTeacher} >רישום </button>
-          <button className="button btn-sign-teacher" onClick={test} >test </button>
+          {/* <button className="button btn-sign-teacher" onClick={test} >test </button> */}
       </div>
     </div>
   </div>

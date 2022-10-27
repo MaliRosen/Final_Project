@@ -58,7 +58,7 @@
     border-top-right-radius: 25%;
     border-end-end-radius: 25%;
     border-bottom-left-radius: 25%;
-    align-items: flex-end;
+    /* align-items: flex-end; */
     flex-direction: column;
 
 }

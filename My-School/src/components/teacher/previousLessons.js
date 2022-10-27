@@ -70,7 +70,7 @@ const PreviousLessons = (props) => {
               <td className="td2">מס שעור</td>
               <td className="td2"> שם שעור</td>
               <td className="td3">  תאריך </td>
-              <td className="td4">  הערה </td>
+              <td className="td4">  הערות </td>
               <td className="td2">  שעה </td>
               <td className="td2">  הורדת ש.ב </td>
               <td className="td2">  הכנסת ש.ב </td>

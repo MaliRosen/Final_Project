@@ -28,7 +28,7 @@ function ForgotPassword() {
             type="text"
             id="email"
             name="email"
-            placeholder=": הכנס דואר אלקטרוני"
+            placeholder=":דואר אלקטרוני"
             value={email}
             onChange={(e) => {
               console.log(e.target.value);
@@ -42,7 +42,7 @@ function ForgotPassword() {
             type="password"
             id="uPassword"
             name="uPassword"
-            placeholder=":הכנס סיסמא חדשה"
+            placeholder=":סיסמא חדשה"
             value={password}
             onChange={(e) => {
               console.log(e.target.value);
@@ -57,7 +57,7 @@ function ForgotPassword() {
             type="password"
             id="uPassword"
             name="uPassword"
-            placeholder=":הכנס שוב לצורך אימות"
+            placeholder=":הזנה שוב לצורך אימות"
             value={password2}
             onChange={(e) => {
               console.log(e.target.value);

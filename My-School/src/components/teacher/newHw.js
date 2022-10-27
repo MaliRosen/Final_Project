@@ -66,13 +66,13 @@ const NewHw = (props) => {
                         setDate(e.target.value)
                     }}
                 />
-                <input placeholder=" הכנס הערה" className="a e"
+                <input placeholder="הערות" className="a e"
                     value={comment} onChange={(e) => {
                         console.log(e.target.value)
                         setComment(e.target.value)
                     }} />
 
-                <input placeholder=" שאלה 1 " className="a f"
+                {/* <input placeholder=" שאלה 1 " className="a f"
                     value={question1} onChange={(e) => {
                         console.log(e.target.value)
                         setQuestion1(e.target.value)
@@ -82,7 +82,7 @@ const NewHw = (props) => {
                     value={question2} onChange={(e) => {
                         console.log(e.target.value)
                         setQuestion2(e.target.value)
-                    }} />
+                    }} /> */}
 
                 <button className="buttn" onClick={() => { postHw(history.location.state?.id ? history.location.state?.id : numLesson, nameSubject, date, file, comment, question1, question2) }}>  הוספה   </button>
 

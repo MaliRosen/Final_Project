@@ -46,7 +46,7 @@ function Subscribe() {
               getAllSubjects();
             }}
           >
-            👉 לחץ כדי לבחור מקצוע
+            👉 לחץ כדי לבחור קורס
           </button>
           {lessons && (
             <div>

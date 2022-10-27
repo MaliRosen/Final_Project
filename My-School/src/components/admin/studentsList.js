@@ -35,7 +35,7 @@ function StudentList(props) {
               <td className="td2">  שם פרטי</td>
               <td className="td2">כתובת מייל</td>
               <td className="td4">  סיסמא </td>
-              <td className="td2">  מקצוע </td>
+              <td className="td2">  קורס </td>
               <td className="td2">  מחק תלמיד </td>
             </tr>
           </thead>

@@ -54,7 +54,7 @@ function Login() {
 
       <div className="iinput_sign ip">
         <input type="text" id="userName" name="userName"
-          placeholder=":הכנס שם משתמש"
+          placeholder=":שם משתמש"
           value={userName} onChange={(e) => {
             console.log(e.target.value)
             setUserName(e.target.value)
@@ -63,7 +63,7 @@ function Login() {
 
       <div className="iinput_sign">
         <input type="password" id="uPassword" name="uPassword"
-          placeholder=":הכנס סיסמא"
+          placeholder=":סיסמא"
           value={password} onChange={(e) => {
             console.log(e.target.value)
             setPassword(e.target.value)
