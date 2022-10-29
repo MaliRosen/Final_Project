@@ -15,7 +15,7 @@ class Login {
   login = async (req, res) => {
     try {
       const { user, password } = req.query;
-      if (user == "1" && password == "1") return res.json({ kind: "admin" });
+      if (user == "admin" && password == "12345678") return res.json({ kind: "admin" });
       var query = { email: user, password };
       let result;
       result = await Student.findOne(query);
